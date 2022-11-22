@@ -21,9 +21,6 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Unit Tests
-        run: npm run test
-
       - name: Build
         run: npm run build
 
@@ -39,7 +36,7 @@ jobs:
     runs-on: macos-11
     environment:
       name: dev
-      url: https://virtual-hub-dev.netlify.app
+      url: https://virtualhub-dev.netlify.app
 
     steps:
       - name: Download Latest Artifact
@@ -69,7 +66,7 @@ jobs:
     runs-on: macos-11
     environment:
       name: production
-      url: https://virtual-hub.netlify.app
+      url: https://virtualhub.netlify.app
 
     steps:
       - name: Download Latest Artifact
