@@ -1,16 +1,15 @@
 import { useState } from "react";
 
 export const useUserLocation = () => {
-  const [coordinates, setCoordinates] = useState({});
+  const [userLocation, setUserLocation] = useState({});
 
-  function getLocationCoordinates() {
+  function getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((data) => {
-        console.log(data);
-        setCoordinates({ latitude: data.coords.latitude, longitude: data.coords.longitude });
+        setUserLocation({ latitude: data.coords.latitude, longitude: data.coords.longitude });
       });
     }
   };
 
-  return [ coordinates, getLocationCoordinates ];
+  return [userLocation, getUserLocation];
 }

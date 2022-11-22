@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
-import { useUserLocation } from "./hooks/useUserLocation";
+import React from "react";
+import { Locations } from './components/Locations';
 
 const App = () => {
-  const [coordinates, getLocationCoordinates] = useUserLocation();
-
-  useEffect(() => {
-    getLocationCoordinates();
-  }, []);
-
   return (
     <>
-      <h1>Latitude: {coordinates.latitude}</h1>
-      <h1>Longitude: {coordinates.longitude}</h1>;
+      <Locations />
     </>
   );
 };
