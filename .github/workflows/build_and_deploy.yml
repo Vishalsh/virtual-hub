@@ -65,7 +65,7 @@ jobs:
     needs: dev_delpoy
     runs-on: macos-11
     environment:
-      name: production
+      name: prod
       url: https://virtualhub.netlify.app
 
     steps:
