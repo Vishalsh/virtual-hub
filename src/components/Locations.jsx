@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LocationInput } from "./LocationInput";
 
-export const Locations = ({ userLocation }) => {
+export const Locations = ({ userLocation, onSelectLocation }) => {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);
 
   function addANewLocation() {
@@ -22,7 +22,8 @@ export const Locations = ({ userLocation }) => {
         .map((locationSequence) => {
           return (
             <article key={locationSequence}>
-              <span>Location {locationSequence}:</span> <LocationInput />
+              <span>Location {locationSequence}:</span>
+              <LocationInput onSelectLocation={onSelectLocation}  />
             </article>
           );
         })}

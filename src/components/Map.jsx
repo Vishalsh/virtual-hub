@@ -10,7 +10,9 @@ const containerStyle = {
   height: "500px",
 };
 
-export const Map = ({ userLocation }) => {
+export const Map = ({ userLocation, locationPoints }) => {
+  console.log(locationPoints);
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
