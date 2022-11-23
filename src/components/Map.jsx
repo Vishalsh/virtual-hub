@@ -50,7 +50,6 @@ export const Map = ({ userLocation, locationPoints }) => {
               travelMode: google.maps.TravelMode.DRIVING,
             }}
             callback={directionsCallback}
-            
           />
           <DirectionsRenderer
             options={{

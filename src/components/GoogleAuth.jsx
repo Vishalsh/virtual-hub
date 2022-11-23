@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { gapi } from "gapi-script";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
-export const GoogleAuth = () => {
+export const GoogleAuth = ({ onSuccessfulAuth }) => {
   const [profile, setProfile] = useState([]);
   const clientId =
     "722979341660-08ksqdp9fvvgdtvjc0ahlggj5uf20ji6.apps.googleusercontent.com";
@@ -18,8 +18,8 @@ export const GoogleAuth = () => {
   });
 
   const onSuccess = (res) => {
-    
     setProfile(res.profileObj);
+    onSuccessfulAuth();
   };
 
   const onFailure = (err) => {
@@ -61,4 +61,4 @@ export const GoogleAuth = () => {
       )}
     </div>
   );
-}
+};
