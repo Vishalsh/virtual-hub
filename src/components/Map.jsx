@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
-import { LocationInput } from "./LocationInput";
 
 import { DirectionsService } from "@react-google-maps/api";
 import { DirectionsRenderer } from "@react-google-maps/api";
@@ -13,39 +12,23 @@ const containerStyle = {
 
 export const Map = ({ userLocation, locationPoints }) => {
   const [directions, setDirections] = useState(null);
-  const [error, setError] = useState(null);
+  const [directionsResultLoaded, setDirectionsResultLoaded] = useState(false);
 
   useEffect(() => {
-    const waypoints = locationPoints.map((point) => ({
-      location: { lat: point.lat, lng: point.lng },
-      stopover: true,
-    }));
+    setDirectionsResultLoaded(false);
+  }, [locationPoints]);
 
-    const origin = userLocation;
-    const destination = waypoints.pop()?.location;
-
-    const directionsService = new google.maps.DirectionsService();
-    directionsService.route(
-      {
-        origin: origin,
-        destination: destination,
-        travelMode: google.maps.TravelMode.DRIVING,
-        waypoints: waypoints,
-      },
-      (result, status) => {
-        console.log(result);
-        if (status === google.maps.DirectionsStatus.OK) {
-          setDirections(result);
-        } else {
-          setError(result);
-        }
+  function directionsCallback(response) {
+    if (response !== null && !directionsResultLoaded) {
+      if (response.status === "OK") {
+        setDirections(response);
+        setDirectionsResultLoaded(true);
+      } else {
+        alert("Something went wrong while drawing the route");
       }
-    );
-  });
-
-  if (error) {
-    return <h1>{error}</h1>;
+    }
   }
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -53,10 +36,29 @@ export const Map = ({ userLocation, locationPoints }) => {
       zoom={10}
     >
       <Marker position={userLocation} />
-      <DirectionsRenderer
-        containerStyle={containerStyle}
-        directions={directions}
-      />
+      {locationPoints.length > 0 && (
+        <>
+          <DirectionsService
+            options={{
+              origin: userLocation,
+              destination: locationPoints[locationPoints.length - 1],
+              waypoints: locationPoints
+                .slice(0, locationPoints.length - 1)
+                .map((point) => ({
+                  location: { lat: point.lat, lng: point.lng },
+                })),
+              travelMode: google.maps.TravelMode.DRIVING,
+            }}
+            callback={directionsCallback}
+            
+          />
+          <DirectionsRenderer
+            options={{
+              directions,
+            }}
+          />
+        </>
+      )}
     </GoogleMap>
   );
 };

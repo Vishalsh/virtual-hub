@@ -11,7 +11,7 @@ const Dashboard = () => {
     getUserLocation();
   }, []);
 
-  function onSelectLocation(location) {    
+  function onSelectLocation(location) {
     setLocationPoints([...locationPoints, location]);
   }
 
@@ -19,8 +19,14 @@ const Dashboard = () => {
     <>
       {userLocation?.lat && (
         <>
-          <Locations userLocation={userLocation} onSelectLocation={onSelectLocation} />
-          <Map userLocation={userLocation} locationPoints={locationPoints} />
+          <Locations
+            userLocation={userLocation}
+            onSelectLocation={onSelectLocation}
+          />
+          <Map
+            userLocation={userLocation}
+            locationPoints={locationPoints}
+          />
         </>
       )}
     </>
