@@ -1,9 +1,13 @@
 import React from "react";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
-    <Dashboard />
+    <>
+      <Auth />
+      <Dashboard />
+    </>
   );
 };
 
