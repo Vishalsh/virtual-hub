@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useUserLocation } from "../hooks/useUserLocation";
+import React, { useState } from "react";
 import { LocationInput } from "./LocationInput";
 
-export const Locations = () => {
-  const [userLocation, getUserLocation] = useUserLocation();
+export const Locations = ({ userLocation }) => {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);
-
-  useEffect(() => {
-    getUserLocation();
-  }, []);
 
   function addANewLocation() {
     if (numberOfAddedLocations < 3) {
@@ -20,10 +14,7 @@ export const Locations = () => {
     <>
       <article>
         <span>Location A </span>
-        <input
-          value={userLocation?.latitude ? `${userLocation?.latitude}, ${userLocation?.longitude}` : ''}
-          readOnly
-        />
+        <input value={`${userLocation?.lat}, ${userLocation?.lng}`} readOnly />
       </article>
 
       {["B", "C", "D"]

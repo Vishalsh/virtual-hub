@@ -6,7 +6,7 @@ export const useUserLocation = () => {
   function getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((data) => {
-        setUserLocation({ latitude: data.coords.latitude, longitude: data.coords.longitude });
+        setUserLocation({ lat: data.coords.latitude, lng: data.coords.longitude });
       });
     }
   };
