@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
 import Auth from "./pages/Auth";
-import Dashboard from "./pages/Dashboard";
+import RoutePlanner from "./pages/RoutePlanner";
 
 const App = () => {
   return (
@@ -14,8 +14,8 @@ const App = () => {
         <Route exact path="/">
           <Auth />
         </Route>
-        <Route path="/dashboard">
-          <Dashboard />
+        <Route path="/route-planner">
+          <RoutePlanner />
         </Route>
       </Switch>
     </BrowserRouter>

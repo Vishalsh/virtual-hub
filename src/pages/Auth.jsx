@@ -7,7 +7,7 @@ function Auth() {
   let history = useHistory();
 
   function onSuccessfulAuth() {
-    history.push('/dashboard');
+    history.push('/route-planner');
   }
 
   return (
