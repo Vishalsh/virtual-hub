@@ -10,7 +10,7 @@ const containerStyle = {
   height: "500px",
 };
 
-export const Map = ({ userLocation, locationPoints }) => {
+export const Map = ({ userLocation, locationPoints, afterDrawingRoute }) => {
   const [directions, setDirections] = useState(null);
   const [directionsResultLoaded, setDirectionsResultLoaded] = useState(false);
 
@@ -23,6 +23,11 @@ export const Map = ({ userLocation, locationPoints }) => {
       if (response.status === "OK") {
         setDirections(response);
         setDirectionsResultLoaded(true);
+        const { legs } = response.routes[0];
+        afterDrawingRoute(
+          legs.reduce((totalDistance, leg) => ( totalDistance + leg.distance.value), 0),
+          legs.reduce((totalTime, leg) => ( totalTime + leg.duration.value), 0),
+        );
       } else {
         alert("Something went wrong while drawing the route");
       }
