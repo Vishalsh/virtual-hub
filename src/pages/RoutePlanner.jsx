@@ -1,19 +1,22 @@
-import React, {useEffect, useState} from "react";
-import {RWebShare} from "react-web-share";
-
-import {Locations} from "../components/Locations";
-import {Map} from "../components/Map";
-import {TotalDistance} from "../components/TotalDistance";
-import {TotalTime} from "../components/TotalTime";
-import {useUserLocation} from "../hooks/useUserLocation";
-import * as http from "../utils/http";
+import React, { useState, useEffect, useContext } from "react";
+import { RWebShare } from "react-web-share";
+import { MobileView } from "react-device-detect";
 import addNotification from "react-push-notification";
+
+import { Locations } from "../components/Locations";
+import { Map } from "../components/Map";
+import { TotalDistance } from "../components/TotalDistance";
+import { TotalTime } from "../components/TotalTime";
+import { useUserLocation } from "../hooks/useUserLocation";
+import { UserContext } from "../context/UserContext";
+import * as http from "../utils/http";
 
 const RoutePlanner = () => {
   const [userLocation, getUserLocation] = useUserLocation();
   const [locationPoints, setLocationPoints] = useState([]);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     getUserLocation();
@@ -30,30 +33,37 @@ const RoutePlanner = () => {
 
   async function saveRoute() {
     try {
-      await http.post("https://e-commerce-microfrontends-apis.herokuapp.com/products", {
-        route: {
-          origin: userLocation,
-          destination: locationPoints[locationPoints.length - 1],
-          wayPoints: locationPoints.slice(0, locationPoints.length - 1),
-        },
-      });
+      await http.post(
+        "https://e-commerce-microfrontends-apis.herokuapp.com/products",
+        {
+          userName: user.name,
+          route: {
+            origin: userLocation,
+            destination: locationPoints[locationPoints.length - 1],
+            wayPoints: locationPoints.slice(0, locationPoints.length - 1),
+          },
+        }
+      );
+      pushNotification();
     } catch (error) {
+      console.log(error);
       alert("Something went erong while saving the route");
     }
   }
 
   function pushNotification() {
     addNotification({
-      title: 'Warning',
-      subtitle: 'This is a subtitle',
-      message: 'This is a very long message',
-      theme: 'darkblue',
-      native: true // when using native, your OS will handle theming.
+      title: "Success",
+      subtitle: "Successfully Saved",
+      message: "The route has been saved Successfully",
+      theme: "darkblue",
+      native: true, // when using native, your OS will handle theming.
     });
   }
 
   return (
     <>
+      <h2>Hello {user?.name}</h2>
       {userLocation?.lat && (
         <>
           <Locations
@@ -91,10 +101,7 @@ const RoutePlanner = () => {
                 onClick={() => console.log("shared successfully!")}
               >
                 <button>Share 🔗</button>
-              </RWebShare>
-              <button onClick={pushNotification} className="button">
-                Push Notification
-              </button>
+              </RWebShare>              
             </>
           )}
         </>

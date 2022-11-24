@@ -19,7 +19,7 @@ export const GoogleAuth = ({ onSuccessfulAuth }) => {
 
   const onSuccess = (res) => {
     setProfile(res.profileObj);
-    onSuccessfulAuth();
+    onSuccessfulAuth({ name: res.profileObj.name, imageUrl: res.profileObj.imageUrl });
   };
 
   const onFailure = (err) => {

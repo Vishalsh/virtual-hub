@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { GoogleAuth } from '../components/GoogleAuth';
+import { UserContext } from "../context/UserContext";
 
 function Auth() {
-  let history = useHistory();
+  const history = useHistory();
+  const { setUser } = useContext(UserContext);
 
-  function onSuccessfulAuth() {
+  function onSuccessfulAuth(user) {
+    setUser(user);
     history.push('/route-planner');
   }
 
