@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, createRef } from "react";
 import { RWebShare } from "react-web-share";
 import { MobileView } from "react-device-detect";
 import addNotification from "react-push-notification";
@@ -17,6 +17,7 @@ const RoutePlanner = () => {
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const { user } = useContext(UserContext);
+  const fileInput = createRef();
 
   useEffect(() => {
     getUserLocation();
@@ -37,6 +38,7 @@ const RoutePlanner = () => {
         "https://e-commerce-microfrontends-apis.herokuapp.com/products",
         {
           userName: user.name,
+          image: fileInput.current.files[0],
           route: {
             origin: userLocation,
             destination: locationPoints[locationPoints.length - 1],
@@ -77,6 +79,8 @@ const RoutePlanner = () => {
             locationPoints={locationPoints}
             afterDrawingRoute={showTotalDistanceAndTime}
           />
+
+          <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg" />
           {locationPoints.length > 0 && (
             // <MobileView>
             //   <RWebShare
