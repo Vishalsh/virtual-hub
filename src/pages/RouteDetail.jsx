@@ -7,7 +7,7 @@ import {TotalTime} from "../components/TotalTime.jsx";
 const DUMMY_DATA = {
   UUID: 'some-uuid-string',
   route: {
-    origin: {lat: 28.5076444, lng: 77.0522823},
+    origin: {lat: 28.5076444, lng: 77.0522823, name: "Somewhere in NCR"},
     wayPoints: [
       {
         "lat": 28.632047,
