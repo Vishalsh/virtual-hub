@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { RWebShare } from "react-web-share";
-import { MobileView } from "react-device-detect";
+import React, {useEffect, useState} from "react";
+import {RWebShare} from "react-web-share";
 
-import { Locations } from "../components/Locations";
-import { Map } from "../components/Map";
-import { TotalDistance } from "../components/TotalDistance";
-import { TotalTime } from "../components/TotalTime";
-import { useUserLocation } from "../hooks/useUserLocation";
+import {Locations} from "../components/Locations";
+import {Map} from "../components/Map";
+import {TotalDistance} from "../components/TotalDistance";
+import {TotalTime} from "../components/TotalTime";
+import {useUserLocation} from "../hooks/useUserLocation";
 import * as http from "../utils/http";
+import addNotification from "react-push-notification";
 
 const RoutePlanner = () => {
   const [userLocation, getUserLocation] = useUserLocation();
@@ -40,6 +40,16 @@ const RoutePlanner = () => {
     } catch (error) {
       alert("Something went erong while saving the route");
     }
+  }
+
+  function pushNotification() {
+    addNotification({
+      title: 'Warning',
+      subtitle: 'This is a subtitle',
+      message: 'This is a very long message',
+      theme: 'darkblue',
+      native: true // when using native, your OS will handle theming.
+    });
   }
 
   return (
@@ -82,6 +92,9 @@ const RoutePlanner = () => {
               >
                 <button>Share 🔗</button>
               </RWebShare>
+              <button onClick={pushNotification} className="button">
+                Push Notification
+              </button>
             </>
           )}
         </>
