@@ -60,7 +60,7 @@ const RouteDetail = ({match}) => {
         <div className="profile-image" style={{width: '60px'}}>
           <img src={routeData.image} alt="profile-pic" style={{maxWidth: '100%'}  }/>
         </div>
-        <div className="userName">{routeData.username}</div>
+        <div className="userName">{routeData.userName}</div>
       </div>
       <div className="route-map">
         {!!totalDistance && <TotalDistance distance={totalDistance} />}
