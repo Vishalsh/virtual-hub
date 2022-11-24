@@ -6,6 +6,7 @@ const history = createBrowserHistory();
 
 import Auth from "./pages/Auth";
 import RoutePlanner from "./pages/RoutePlanner";
+import RouteDetail from "./pages/RouteDetail.jsx";
 
 const App = () => {
   return (
@@ -13,6 +14,9 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Auth />
+        </Route>
+        <Route path="/route-planner/:routeId">
+          <RouteDetail />
         </Route>
         <Route path="/route-planner">
           <RoutePlanner />
