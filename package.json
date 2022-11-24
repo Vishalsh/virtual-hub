@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite --config vite.dev.config.js",
-    "build": "rm -rf dist/ && vite build --config vite.prod.config.js"
+    "build": "rm -rf dist/ && vite build --config vite.prod.config.js && copyfiles _redirects dist"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.17.0",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@vitejs/plugin-basic-ssl": "^0.1.2",
     "@vitejs/plugin-react": "^2.2.0",
+    "copyfiles": "^2.4.1",
     "vite": "^3.2.0",
     "vite-plugin-mkcert": "^1.10.1"
   }
