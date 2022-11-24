@@ -10,6 +10,9 @@ export const LocationInput = ({ onSelectLocation }) => {
     <Autocomplete
       apiKey={"AIzaSyCstinGQ1lMWKrUQJ5kJgunSF-oI50MahY"}
       onPlaceSelected={onPlaceSelect}
+      options={{
+        types: ["(regions)"],
+      }}
     />
   );
 };
