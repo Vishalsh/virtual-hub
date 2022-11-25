@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { gapi } from "gapi-script";
 import { useGoogleLogout } from "react-google-login";
 
-export const Logout = ({ onSuccessfulLogout }) => {
+export const GoogleLogout = ({ onSuccessfulLogout }) => {
   const clientId =
     "722979341660-08ksqdp9fvvgdtvjc0ahlggj5uf20ji6.apps.googleusercontent.com";
 

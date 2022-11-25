@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
+import {AUTH_PROVIDER} from "../utils/constants.js";
 
 export const GoogleAuth = ({ onSuccessfulLogin }) => {
   const clientId =
@@ -18,10 +19,10 @@ export const GoogleAuth = ({ onSuccessfulLogin }) => {
   });
 
   function onSuccess(res) {
-    console.log(res);
     onSuccessfulLogin({
       name: res.profileObj.name,
       imageUrl: res.profileObj.imageUrl,
+      authProvider: AUTH_PROVIDER.google
     });
   }
 

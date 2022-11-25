@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Logout } from "./Logout";
+import { GoogleLogout } from "./GoogleLogout.jsx";
 import { UserContext, LOGGET_OUT_USER } from "../context/UserContext";
 import * as storage from "../utils/storage";
+import {MsLogout} from "./MsLogout.jsx";
+import {AUTH_PROVIDER} from "../utils/constants.js";
 
 export const Layout = ({ children }) => {
   const history = useHistory();
@@ -26,7 +28,9 @@ export const Layout = ({ children }) => {
         <>
           <header>
             {user.isLoggedIn && (
-              <Logout onSuccessfulLogout={clearUserDetails} />
+              user.authProvider === AUTH_PROVIDER.google
+                ? <GoogleLogout onSuccessfulLogout={clearUserDetails} />
+                : <MsLogout onSuccessfulLogout={clearUserDetails} />
             )}
           </header>
           <main>{children}</main>

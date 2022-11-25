@@ -1,21 +1,31 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, {useContext} from "react";
+import {Redirect, useHistory} from "react-router-dom";
 
-import { GoogleAuth } from "../components/GoogleAuth";
-import { UserContext } from "../context/UserContext";
+import {GoogleAuth} from "../components/GoogleAuth";
+import {UserContext} from "../context/UserContext";
 import * as storage from "../utils/storage";
+import {MsAuth} from "../components/MsAuth.jsx";
 
 function Login() {
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
 
   function onSuccessfulLogin(user) {
-    setUser({ ...user, isLoggedIn: true });
-    storage.setItem("user", { ...user, isLoggedIn: true });
+    setUser({...user, isLoggedIn: true});
+    storage.setItem("user", {...user, isLoggedIn: true});
     history.push("/route-planner");
   }
 
-  return <GoogleAuth onSuccessfulLogin={onSuccessfulLogin} />;
+  if(user.isLoggedIn) {
+    return history.replace('/route-planner');
+  }
+
+  return (
+    <>
+      <MsAuth onSuccessfulLogin={onSuccessfulLogin}/>
+      <GoogleAuth onSuccessfulLogin={onSuccessfulLogin}/>
+    </>
+  );
 }
 
 export default Login;
