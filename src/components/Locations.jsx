@@ -26,16 +26,6 @@ export const Locations = ({ userLocation, onSelectLocation, locationPoints }) =>
         ))
       }
 
-      {/*{["B", "C", "D"]*/}
-      {/*  .slice(0, numberOfAddedLocations)*/}
-      {/*  .map((locationSequence) => {*/}
-      {/*    return (*/}
-      {/*      <article key={locationSequence}>*/}
-      {/*        <span>Location {locationSequence}:</span>*/}
-      {/*        <LocationInput onSelectLocation={onSelectLocation} />*/}
-      {/*      </article>*/}
-      {/*    );*/}
-      {/*  })}*/}
       {numberOfAddedLocations < 3 && (
         <button onClick={addANewLocation}>Add a location +</button>
       )}
