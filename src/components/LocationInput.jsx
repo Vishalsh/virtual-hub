@@ -17,7 +17,7 @@ export const LocationInput = ({ onSelectLocation }) => {
 
   return (
     <Autocomplete
-      apiKey={"AIzaSyCstinGQ1lMWKrUQJ5kJgunSF-oI50MahY"}
+      apiKey={import.meta.env.VIRTUAL_HUB_GOOGLE_MAP_API_KEY}
       onPlaceSelected={onPlaceSelect}
       options={{
         types: ["(regions)"],

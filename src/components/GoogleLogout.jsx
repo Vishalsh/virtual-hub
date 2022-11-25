@@ -4,9 +4,7 @@ import { gapi } from "gapi-script";
 import { useGoogleLogout } from "react-google-login";
 
 export const GoogleLogout = ({ onSuccessfulLogout }) => {
-  const clientId =
-    "722979341660-08ksqdp9fvvgdtvjc0ahlggj5uf20ji6.apps.googleusercontent.com";
-
+  const clientId = import.meta.env.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID;
   const { signOut } = useGoogleLogout({ clientId });
 
   useEffect(() => {

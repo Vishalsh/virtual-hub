@@ -4,7 +4,7 @@ export const useUserLocation = () => {
   const [userLocation, setUserLocation] = useState({});
 
   function getUserAddress(lat, lng) {
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyCstinGQ1lMWKrUQJ5kJgunSF-oI50MahY`)
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=${import.meta.env.VIRTUAL_HUB_GOOGLE_MAP_API_KEY}`)
       .then(results => results.json())
       .then(data => {
         setUserLocation({

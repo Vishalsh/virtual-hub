@@ -5,8 +5,7 @@ import { GoogleLogin } from "react-google-login";
 import {AUTH_PROVIDER} from "../utils/constants.js";
 
 export const GoogleAuth = ({ onSuccessfulLogin }) => {
-  const clientId =
-    "722979341660-08ksqdp9fvvgdtvjc0ahlggj5uf20ji6.apps.googleusercontent.com";
+  const clientId = import.meta.env.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID;
 
   useEffect(() => {
     const initClient = () => {
