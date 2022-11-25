@@ -23,5 +23,5 @@ export const useUserLocation = () => {
     }
   };
 
-  return [userLocation, getUserLocation];
+  return [userLocation, getUserLocation, setUserLocation];
 }

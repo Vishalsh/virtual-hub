@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useContext, createRef } from "react";
-import { RWebShare } from "react-web-share";
-import { MobileView } from "react-device-detect";
+import React, {useState, useEffect, useContext, createRef} from "react";
+import {RWebShare} from "react-web-share";
+import {MobileView} from "react-device-detect";
 import addNotification from "react-push-notification";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
-import { Locations } from "../components/Locations";
-import { Map } from "../components/Map";
-import { TotalDistance } from "../components/TotalDistance";
-import { TotalTime } from "../components/TotalTime";
-import { useUserLocation } from "../hooks/useUserLocation";
-import { UserContext } from "../context/UserContext";
+import {Locations} from "../components/Locations";
+import {Map} from "../components/Map";
+import {TotalDistance} from "../components/TotalDistance";
+import {TotalTime} from "../components/TotalTime";
+import {useUserLocation} from "../hooks/useUserLocation";
+import {UserContext} from "../context/UserContext";
 import * as http from "../utils/http";
 
 const RoutePlanner = () => {
-  const [userLocation, getUserLocation] = useUserLocation();
+  const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
   const [locationPoints, setLocationPoints] = useState([]);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
-  const { user } = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const fileInput = createRef();
 
   useEffect(() => {
@@ -64,8 +64,14 @@ const RoutePlanner = () => {
     });
   }
 
-  if(!user.isLoggedIn) {
+  if (!user.isLoggedIn) {
     return Redirect('/login');
+  }
+
+  function reverseLocations() {
+    const points = [...locationPoints];
+    setUserLocation(points.pop());
+    setLocationPoints([...points.reverse(), userLocation]);
   }
 
   return (
@@ -75,17 +81,21 @@ const RoutePlanner = () => {
         <>
           <Locations
             userLocation={userLocation}
+            locationPoints={locationPoints}
             onSelectLocation={onSelectLocation}
           />
-          {!!totalDistance && <TotalDistance distance={totalDistance} />}
-          {!!totalTime && <TotalTime time={totalTime} />}
+          {
+            locationPoints.length > 0 && <button onClick={reverseLocations}>Reverse</button>
+          }
+          {!!totalDistance && <TotalDistance distance={totalDistance}/>}
+          {!!totalTime && <TotalTime time={totalTime}/>}
           <Map
             userLocation={userLocation}
             locationPoints={locationPoints}
             afterDrawingRoute={showTotalDistanceAndTime}
           />
 
-          <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg" />
+          <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg"/>
           {locationPoints.length > 0 && (
             // <MobileView>
             //   <RWebShare
