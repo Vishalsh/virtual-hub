@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createRef } from "react";
 import { RWebShare } from "react-web-share";
 import { MobileView } from "react-device-detect";
 import addNotification from "react-push-notification";
+import { Redirect } from "react-router-dom";
 
 import { Locations } from "../components/Locations";
 import { Map } from "../components/Map";
@@ -63,6 +64,10 @@ const RoutePlanner = () => {
     });
   }
 
+  if(!user.isLoggedIn) {
+    return Redirect('/login');
+  }
+
   return (
     <>
       <h2>Hello {user?.name}</h2>
@@ -105,7 +110,7 @@ const RoutePlanner = () => {
                 onClick={() => console.log("shared successfully!")}
               >
                 <button>Share 🔗</button>
-              </RWebShare>              
+              </RWebShare>
             </>
           )}
         </>

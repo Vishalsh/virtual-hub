@@ -37,7 +37,7 @@ export const GoogleAuth = ({ onSuccessfulLogin }) => {
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={"single_host_origin"}
-        isSignedIn={true}
+        isSignedIn={false}
       />
     </>
   );

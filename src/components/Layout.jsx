@@ -1,24 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Logout } from "./Logout";
-import { UserContext } from "../context/UserContext";
+import { UserContext, LOGGET_OUT_USER } from "../context/UserContext";
+import * as storage from "../utils/storage";
 
 export const Layout = ({ children }) => {
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const storedUser = storage.getItem("user");
+    setUser(storedUser === null ? LOGGET_OUT_USER : storedUser);
+  }, []);
 
   function clearUserDetails() {
-    setUser({});
+    setUser(LOGGET_OUT_USER);
+    storage.removeItem("user", null);
     history.push("/login");
   }
 
   return (
     <>
-      <header>
-        <Logout onSuccessfulLogout={clearUserDetails} />
-      </header>
-      <main>{children}</main>
+      {user !== null && (
+        <>
+          <header>
+            {user.isLoggedIn && (
+              <Logout onSuccessfulLogout={clearUserDetails} />
+            )}
+          </header>
+          <main>{children}</main>
+        </>
+      )}
     </>
   );
 };
