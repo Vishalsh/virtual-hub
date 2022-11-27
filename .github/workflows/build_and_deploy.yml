@@ -14,9 +14,6 @@ jobs:
       matrix:
         node-version: [18.x]
 
-    environment:
-      name: dev
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
@@ -29,6 +26,8 @@ jobs:
         with:
           envkey_VIRTUAL_HUB_GOOGLE_MAP_API_KEY: ${{ secrets.VIRTUAL_HUB_GOOGLE_MAP_API_KEY }}
           envkey_VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID: ${{ secrets.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID }}
+          envkey_VIRTUAL_HUB_MS_AUTH_CLIENT_ID: ${{ secrets.VIRTUAL_HUB_MS_AUTH_CLIENT_ID }}
+          envkey_VIRTUAL_HUB_MS_AUTH_AUTHORITY: ${{ secrets.VIRTUAL_HUB_MS_AUTH_AUTHORITY }}
 
       - name: Display env file
         run: |

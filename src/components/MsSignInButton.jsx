@@ -1,13 +1,13 @@
-import {useMsal} from "@azure/msal-react";
+import { useMsal } from "@azure/msal-react";
 
 export const MsSignInButton = () => {
-  const {instance} = useMsal();
+  const { instance } = useMsal();
 
   const handleSignIn = () => {
-    instance.loginRedirect({
-      scopes: ['user.read'],
+    instance.loginPopup({
+      scopes: ["user.read"],
     });
-  }
+  };
 
-  return <button onClick={handleSignIn}>Sign in with Microsoft</button>
-}
+  return <button onClick={handleSignIn}>Sign in with Microsoft</button>;
+};
