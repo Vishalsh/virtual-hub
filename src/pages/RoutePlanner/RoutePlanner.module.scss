@@ -3,8 +3,20 @@
   flex-direction: column;
   height: 100%;
 
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
   &__locations {
-    padding: 30px 50px;
+    padding: 20px 40px;
+
+    @media only screen and (min-width: 768px) {
+      width: 320px;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      width: 400px;
+    }
   }
 
   &__points {
@@ -23,6 +35,8 @@
     border-top: 1px solid #dbdbdb;
     position: relative;
     padding-top: 60px;
+    display: flex;
+    flex-direction: column;
   }
 
   &__reverse {
