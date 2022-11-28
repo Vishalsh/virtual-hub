@@ -78,7 +78,7 @@
     justify-content: space-between;
   }
 
-  &__save, &__share {
+  &__save {
     height: 40px;
     background-color: blue;
     color: #ffffff;
@@ -89,16 +89,6 @@
     border-radius: 50px;
     border: none;
     font-size: 16px;
-  }
-
-  &__share {
-    span {
-      margin-left: 8px;
-    }
-  }
-
-  &__shareIcon {
-    font-size: 20px;
   }
 
   &__uploadImage {
