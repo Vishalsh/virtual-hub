@@ -2,15 +2,22 @@
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "start": "vite --config vite.dev.config.js",
-    "build": "rm -rf dist/ && vite build --config vite.prod.config.js && copyfiles _redirects dist"
+    "build": "rm -rf dist/ && vite build --config vite.prod.config.js && copyfiles _redirects dist",
+    "lint": "eslint './src/**/*.{js,jsx}'",
+    "lint:fix": "eslint './src/**/*.{js,jsx}' -- --fix"
   },
   "dependencies": {
     "@azure/msal-browser": "^2.32.0",
     "@azure/msal-react": "^1.5.0",
     "@react-google-maps/api": "^2.17.0",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "gapi-script": "^1.2.0",
     "history": "^5.0.0",
     "react": "^18.2.0",

@@ -29,10 +29,8 @@ jobs:
           envkey_VIRTUAL_HUB_MS_AUTH_CLIENT_ID: ${{ secrets.VIRTUAL_HUB_MS_AUTH_CLIENT_ID }}
           envkey_VIRTUAL_HUB_MS_AUTH_AUTHORITY: ${{ secrets.VIRTUAL_HUB_MS_AUTH_AUTHORITY }}
 
-      - name: Display env file
-        run: |
-          cat .env
-        shell: bash
+      - name: Lint
+        run: npm run lint
 
       - name: Build
         run: npm run build

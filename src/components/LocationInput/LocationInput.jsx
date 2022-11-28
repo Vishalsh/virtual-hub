@@ -1,16 +1,18 @@
-import React, {useEffect} from "react";
-import {usePlacesWidget} from "react-google-autocomplete";
+import React, { useEffect } from 'react';
+import { usePlacesWidget } from 'react-google-autocomplete';
 
-export const LocationInput = ({ onSelectLocation, location }) => {
+export function LocationInput({ onSelectLocation, location }) {
   function onPlaceSelect(place) {
     const {
-      geometry: { location },
+      geometry,
+      // eslint-disable-next-line camelcase
       formatted_address,
     } = place;
 
     onSelectLocation({
-      lat: location.lat(),
-      lng: location.lng(),
+      lat: geometry.location.lat(),
+      lng: geometry.location.lng(),
+      // eslint-disable-next-line camelcase
       name: formatted_address,
     });
   }
@@ -19,15 +21,15 @@ export const LocationInput = ({ onSelectLocation, location }) => {
     apiKey: import.meta.env.VIRTUAL_HUB_GOOGLE_MAP_API_KEY,
     onPlaceSelected: onPlaceSelect,
     options: {
-      types: ["(regions)"],
+      types: ['(regions)'],
     },
   });
 
   useEffect(() => {
-    if(location) {
+    if (location) {
       ref.current.value = location.name;
     }
   }, [location]);
 
   return <input ref={ref} />;
-};
+}

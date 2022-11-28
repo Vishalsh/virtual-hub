@@ -1,17 +1,17 @@
-import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {createBrowserHistory} from "history";
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
+import { MsalProvider } from '@azure/msal-react';
+import Login from './pages/Login/Login';
+import RoutePlanner from './pages/RoutePlanner/RoutePlanner';
+import RouteDetail from './pages/RouteDetail/RouteDetail';
+import UserProvider from './context/UserContext';
+import { Layout } from './components/Layout/Layout';
 
 const history = createBrowserHistory();
 
-import Login from "./pages/Login/Login.jsx";
-import RoutePlanner from "./pages/RoutePlanner/RoutePlanner.jsx";
-import RouteDetail from "./pages/RouteDetail/RouteDetail.jsx";
-import UserProvider from "./context/UserContext";
-import {Layout} from "./components/Layout/Layout.jsx";
-import {MsalProvider} from "@azure/msal-react";
-
-const App = ({msalInstance}) => {
+function App({ msalInstance }) {
   return (
     <MsalProvider instance={msalInstance}>
       <BrowserRouter history={history}>
@@ -19,16 +19,16 @@ const App = ({msalInstance}) => {
           <Layout>
             <Switch>
               <Route exact path="/">
-                <Login/>
+                <Login />
               </Route>
               <Route exact path="/login">
-                <Login/>
+                <Login />
               </Route>
               <Route path="/route-planner/:routeId">
-                <RouteDetail/>
+                <RouteDetail />
               </Route>
               <Route path="/route-planner">
-                <RoutePlanner/>
+                <RoutePlanner />
               </Route>
             </Switch>
           </Layout>
@@ -36,6 +36,6 @@ const App = ({msalInstance}) => {
       </BrowserRouter>
     </MsalProvider>
   );
-};
+}
 
 export default App;

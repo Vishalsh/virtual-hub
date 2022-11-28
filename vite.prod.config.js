@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { splitVendorChunkPlugin } from 'vite';
-import VitePluginHtmlEnv from 'vite-plugin-html-env'
+import VitePluginHtmlEnv from 'vite-plugin-html-env';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
     splitVendorChunkPlugin(),
     VitePluginHtmlEnv({
-      envPrefixes: 'VIRTUAL_HUB_'
+      envPrefixes: 'VIRTUAL_HUB_',
     }),
   ],
   build: {

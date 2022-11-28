@@ -1,11 +1,10 @@
-import { MsSignInButton } from "../MsSignInButton/MsSignInButton.jsx";
-import { useIsAuthenticated, useMsal } from "@azure/msal-react";
-import { MsLogout } from "../MsLogout/MsLogout.jsx";
-import { useEffect } from "react";
-import { EventType } from "@azure/msal-browser";
-import { AUTH_PROVIDER } from "../../utils/constants.js";
+import React, { useEffect } from 'react';
+import { useMsal } from '@azure/msal-react';
+import { EventType } from '@azure/msal-browser';
+import { MsSignInButton } from '../MsSignInButton/MsSignInButton';
+import { AUTH_PROVIDER } from '../../utils/constants';
 
-export const MsAuth = ({ onSuccessfulLogin }) => {
+export function MsAuth({ onSuccessfulLogin }) {
   const { instance } = useMsal();
 
   useEffect(() => {
@@ -26,4 +25,4 @@ export const MsAuth = ({ onSuccessfulLogin }) => {
   }, [instance]);
 
   return <MsSignInButton />;
-};
+}

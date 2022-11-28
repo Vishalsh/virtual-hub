@@ -1,8 +1,8 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext } from 'react';
 
 export const LOGGET_OUT_USER = {
-  name: "",
-  imageUrl: "",
+  name: '',
+  imageUrl: '',
   isLoggedIn: false,
 };
 
@@ -11,15 +11,16 @@ export const UserContext = createContext({
   setUser: () => {},
 });
 
-export default function ({ children }) {
+export default function UserProvier({ children }) {
   const [user, setUser] = useState(null);
 
-  function setUserState(user) {
-    setUser(user);
+  function setUserState(updatedUser) {
+    setUser(updatedUser);
   }
 
   return (
     <UserContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         user,
         setUser: setUserState,

@@ -1,47 +1,47 @@
-import {Map} from "../../components/Map/Map.jsx";
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {TotalDistance} from "../../components/TotalDistance/TotalDistance.jsx";
-import {TotalTime} from "../../components/TotalTime/TotalTime.jsx";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Map } from '../../components/Map/Map';
+import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
+import { TotalTime } from '../../components/TotalTime/TotalTime';
 
 const DUMMY_DATA = {
   UUID: 'some-uuid-string',
   route: {
-    origin: {lat: 28.5076444, lng: 77.0522823, name: "Somewhere in NCR"},
+    origin: { lat: 28.5076444, lng: 77.0522823, name: 'Somewhere in NCR' },
     wayPoints: [
       {
-        "lat": 28.632047,
-        "lng": 77.1389094,
-        "name": "Naraina, New Delhi, Delhi, India"
+        lat: 28.632047,
+        lng: 77.1389094,
+        name: 'Naraina, New Delhi, Delhi, India',
       },
       {
-        "lat": 28.5503314,
-        "lng": 77.2501893,
-        "name": "Nehru Place, New Delhi, Delhi, India"
+        lat: 28.5503314,
+        lng: 77.2501893,
+        name: 'Nehru Place, New Delhi, Delhi, India',
       },
     ],
     destination: {
-      "lat": 28.4594965,
-      "lng": 77.0266383,
-      "name": "Gurugram, Haryana, India"
+      lat: 28.4594965,
+      lng: 77.0266383,
+      name: 'Gurugram, Haryana, India',
     },
     totalDistance: '200km',
   },
   userName: 'Prashant',
   image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-}
+};
 
-const RouteDetail = ({match}) => {
+function RouteDetail() {
   const [routeData, setRouteData] = useState(null);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
 
-  const {routeId} = useParams();
+  const { routeId } = useParams();
 
   useEffect(() => {
     fetch(`/route-planner/${routeId}`)
-      .then(results => results.json())
-      .then(routeData => {
+      .then((results) => results.json())
+      .then(() => {
         setRouteData(routeData);
       })
       .catch(() => {
@@ -55,10 +55,11 @@ const RouteDetail = ({match}) => {
   }
 
   return (
-    routeData && <div className="route-detail">
+    routeData && (
+    <div className="route-detail">
       <div className="profile-info">
-        <div className="profile-image" style={{width: '60px'}}>
-          <img src={routeData.image} alt="profile-pic" style={{maxWidth: '100%'}  }/>
+        <div className="profile-image" style={{ width: '60px' }}>
+          <img src={routeData.image} alt="profile-pic" style={{ maxWidth: '100%' }} />
         </div>
         <div className="userName">{routeData.userName}</div>
       </div>
@@ -72,7 +73,8 @@ const RouteDetail = ({match}) => {
         />
       </div>
     </div>
-  )
-};
+    )
+  );
+}
 
 export default RouteDetail;

@@ -14,7 +14,7 @@ export default defineConfig({
     mkcert(),
     react(),
     VitePluginHtmlEnv({
-      envPrefixes: 'VIRTUAL_HUB_'
+      envPrefixes: 'VIRTUAL_HUB_',
     }),
   ],
 });

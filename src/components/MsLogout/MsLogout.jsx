@@ -1,12 +1,13 @@
-import {useMsal} from "@azure/msal-react";
+import React from 'react';
+import { useMsal } from '@azure/msal-react';
 
-export const MsLogout = ({ onSuccessfulLogout }) => {
-  const {instance} = useMsal();
+export function MsLogout({ onSuccessfulLogout }) {
+  const { instance } = useMsal();
 
-  const handleLogout = () => {
+  function handleLogout() {
     instance.logoutRedirect();
     onSuccessfulLogout();
   }
 
-  return <button onClick={handleLogout}>Sign out</button>
+  return <button type="button" onClick={handleLogout}>Sign out</button>;
 }

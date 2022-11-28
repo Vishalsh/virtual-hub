@@ -1,31 +1,31 @@
-import React, {useContext} from "react";
-import {Redirect, useHistory} from "react-router-dom";
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import {GoogleAuth} from "../../components/GoogleAuth/GoogleAuth.jsx";
-import {UserContext} from "../../context/UserContext.jsx";
-import * as storage from "../../utils/storage.js";
-import {MsAuth} from "../../components/MsAuth/MsAuth.jsx";
+import { GoogleAuth } from '../../components/GoogleAuth/GoogleAuth';
+import { UserContext } from '../../context/UserContext';
+import * as storage from '../../utils/storage';
+import { MsAuth } from '../../components/MsAuth/MsAuth';
 import styles from './Login.module.scss';
 
 function Login() {
   const history = useHistory();
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  function onSuccessfulLogin(user) {
-    setUser({...user, isLoggedIn: true});
-    storage.setItem("user", {...user, isLoggedIn: true});
-    history.push("/route-planner");
+  function onSuccessfulLogin(updatedUser) {
+    setUser({ ...updatedUser, isLoggedIn: true });
+    storage.setItem('user', { ...updatedUser, isLoggedIn: true });
+    history.push('/route-planner');
   }
 
-  if(user.isLoggedIn) {
+  if (user.isLoggedIn) {
     return history.replace('/route-planner');
   }
 
   return (
     <div className={styles.login}>
       <div className={styles.login__buttons}>
-        <MsAuth onSuccessfulLogin={onSuccessfulLogin}/>
-        <GoogleAuth onSuccessfulLogin={onSuccessfulLogin}/>
+        <MsAuth onSuccessfulLogin={onSuccessfulLogin} />
+        <GoogleAuth onSuccessfulLogin={onSuccessfulLogin} />
       </div>
     </div>
   );

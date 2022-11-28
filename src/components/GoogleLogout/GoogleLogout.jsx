@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { gapi } from "gapi-script";
-import { useGoogleLogout } from "react-google-login";
+import { gapi } from 'gapi-script';
+import { useGoogleLogout } from 'react-google-login';
 
-export const GoogleLogout = ({ onSuccessfulLogout }) => {
+export function GoogleLogout({ onSuccessfulLogout }) {
   const clientId = import.meta.env.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID;
   const { signOut } = useGoogleLogout({ clientId });
 
   useEffect(() => {
     const initClient = () => {
       gapi.client.init({
-        clientId: clientId,
-        scope: "",
+        clientId,
+        scope: '',
       });
     };
-    gapi.load("client:auth2", initClient);
+    gapi.load('client:auth2', initClient);
   });
 
   function logout() {
@@ -22,5 +22,5 @@ export const GoogleLogout = ({ onSuccessfulLogout }) => {
     onSuccessfulLogout();
   }
 
-  return <button onClick={logout}>Logout</button>;
-};
+  return <button type="button" onClick={logout}>Logout</button>;
+}

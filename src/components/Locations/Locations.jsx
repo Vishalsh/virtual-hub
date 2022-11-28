@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { LocationInput } from "../LocationInput/LocationInput.jsx";
+import React, { useState } from 'react';
+import { LocationInput } from '../LocationInput/LocationInput';
 
-export const Locations = ({ userLocation, onSelectLocation, locationPoints }) => {
+export function Locations({ userLocation, onSelectLocation, locationPoints }) {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);
-  const locationSequence = ["B", "C", "D"];
+  const locationSequence = ['B', 'C', 'D'];
 
   function addANewLocation() {
     if (numberOfAddedLocations < 3) {
@@ -20,15 +20,19 @@ export const Locations = ({ userLocation, onSelectLocation, locationPoints }) =>
       {
         Array.from({ length: numberOfAddedLocations }, (v, i) => i).map((_, index) => (
           <article key={locationSequence[index]}>
-            <span>Location {locationSequence[index]}:</span>
+            <span>
+              Location
+              {locationSequence[index]}
+              :
+            </span>
             <LocationInput onSelectLocation={onSelectLocation} location={locationPoints[index]} />
           </article>
         ))
       }
 
       {numberOfAddedLocations < 3 && (
-        <button onClick={addANewLocation}>Add a location +</button>
+        <button type="button" onClick={addANewLocation}>Add a location +</button>
       )}
     </>
   );
-};
+}
