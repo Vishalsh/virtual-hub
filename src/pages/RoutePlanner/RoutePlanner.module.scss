@@ -22,6 +22,7 @@
   &__points {
     margin-top: 20px;
     position: relative;
+    padding-bottom: 40px;
   }
 
   &__user {
@@ -41,8 +42,8 @@
 
   &__reverse {
     position: absolute;
-    bottom: 5px;
     right: 0;
+    bottom: 3px;
     background-color: transparent;
     border: none;
     cursor: pointer;

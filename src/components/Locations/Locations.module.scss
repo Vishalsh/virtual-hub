@@ -10,6 +10,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .location {
@@ -42,6 +45,7 @@
       background-color: #f4f4f4;
       padding: 0 20px;
       outline: none;
+      width: 100%;
     }
   }
 }
