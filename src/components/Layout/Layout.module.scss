@@ -11,6 +11,15 @@
     font-weight: normal;
     font-size: 24px;
   }
+
+  &__titleMobile {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-weight: normal;
+    font-size: 24px;
+    width: 100%;
+  }
 }
 
 .content {

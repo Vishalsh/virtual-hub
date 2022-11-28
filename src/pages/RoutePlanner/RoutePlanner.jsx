@@ -104,7 +104,7 @@ function RoutePlanner() {
         </div>
       </div>
       {userLocation?.lat && (
-        <div className={styles.routePlanner__map}>
+        <div className={`${styles.routePlanner__map} ${(!!totalDistance || !!totalTime) && styles.routePlanner__mapData}`}>
           {(!!totalDistance || !!totalTime) && (
             <div className={styles.stats}>
               {!!totalDistance && <TotalDistance distance={totalDistance} />}

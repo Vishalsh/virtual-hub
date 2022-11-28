@@ -30,7 +30,11 @@ export function Layout({ children }) {
   return (
     <>
       <header className={styles.header}>
-        <h1 className={styles.header__title}>Virtual Hub</h1>
+        <h1
+          className={user.isLoggedIn ? styles.header__title : styles.header__titleMobile}
+        >
+          Virtual Hub
+        </h1>
         {user.isLoggedIn && (
           user.authProvider === AUTH_PROVIDER.google
             ? (
