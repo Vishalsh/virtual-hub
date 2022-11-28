@@ -7,7 +7,7 @@ export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
   const [directions, setDirections] = useState(null);
   const [directionsResultLoaded, setDirectionsResultLoaded] = useState(false);
   const [route, setRoute] = useState(null);
-  const url = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/optimalPath`;
+  const url = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/optimal-path`;
 
   async function fetchOptimalRoute() {
     try {
