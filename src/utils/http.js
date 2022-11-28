@@ -7,7 +7,11 @@ export async function post(url, data) {
     },
   });
 
-  return response.json();
+  const jsonResponse = response.json();
+  if (jsonResponse.status > 400) {
+    throw jsonResponse.error;
+  }
+  return jsonResponse;
 }
 
 export async function get(url) {

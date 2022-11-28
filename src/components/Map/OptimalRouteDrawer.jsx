@@ -23,8 +23,19 @@ export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
     }
   }
 
+  function drawPathLocally() {
+    setRoute({
+      origin,
+      destination: wayPoints[0],
+      wayPoints: [],
+    });
+  }
+
   useEffect(() => {
-    if (wayPoints.length > 0) {
+    if (wayPoints.length === 1) {
+      drawPathLocally();
+    }
+    if (wayPoints.length > 1) {
       fetchOptimalRoute();
     }
   }, [wayPoints]);
@@ -58,7 +69,9 @@ export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
         options={{
           origin: route.origin,
           destination: route.destination,
-          waypoints: route.wayPoints,
+          waypoints: route.wayPoints.map((point) => ({
+            location: { lat: point.lat, lng: point.lng },
+          })),
           // eslint-disable-next-line no-undef
           travelMode: google.maps.TravelMode.DRIVING,
         }}
