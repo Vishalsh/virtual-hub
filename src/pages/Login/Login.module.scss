@@ -8,5 +8,14 @@
   &__buttons {
     display: flex;
     flex-direction: column;
+
+    button:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    button:last-child {
+      margin-top: 15px;
+    }
   }
 }
