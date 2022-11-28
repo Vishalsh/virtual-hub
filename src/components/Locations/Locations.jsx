@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LocationInput } from "./LocationInput";
+import { LocationInput } from "../LocationInput/LocationInput.jsx";
 
 export const Locations = ({ userLocation, onSelectLocation, locationPoints }) => {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);

@@ -1,9 +1,9 @@
-import { MsSignInButton } from "./MsSignInButton.jsx";
+import { MsSignInButton } from "../MsSignInButton/MsSignInButton.jsx";
 import { useIsAuthenticated, useMsal } from "@azure/msal-react";
-import { MsLogout } from "./MsLogout.jsx";
+import { MsLogout } from "../MsLogout/MsLogout.jsx";
 import { useEffect } from "react";
 import { EventType } from "@azure/msal-browser";
-import { AUTH_PROVIDER } from "../utils/constants.js";
+import { AUTH_PROVIDER } from "../../utils/constants.js";
 
 export const MsAuth = ({ onSuccessfulLogin }) => {
   const { instance } = useMsal();

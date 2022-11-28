@@ -1,8 +1,8 @@
-import {Map} from "../components/Map.jsx";
+import {Map} from "../../components/Map/Map.jsx";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {TotalDistance} from "../components/TotalDistance.jsx";
-import {TotalTime} from "../components/TotalTime.jsx";
+import {TotalDistance} from "../../components/TotalDistance/TotalDistance.jsx";
+import {TotalTime} from "../../components/TotalTime/TotalTime.jsx";
 
 const DUMMY_DATA = {
   UUID: 'some-uuid-string',

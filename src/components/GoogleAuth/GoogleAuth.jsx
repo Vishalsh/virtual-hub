@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
-import {AUTH_PROVIDER} from "../utils/constants.js";
+import {AUTH_PROVIDER} from "../../utils/constants.js";
 
 export const GoogleAuth = ({ onSuccessfulLogin }) => {
   const clientId = import.meta.env.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID;

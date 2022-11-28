@@ -4,13 +4,13 @@ import {MobileView} from "react-device-detect";
 import addNotification from "react-push-notification";
 import {Redirect} from "react-router-dom";
 
-import {Locations} from "../components/Locations";
-import {Map} from "../components/Map";
-import {TotalDistance} from "../components/TotalDistance";
-import {TotalTime} from "../components/TotalTime";
-import {useUserLocation} from "../hooks/useUserLocation";
-import {UserContext} from "../context/UserContext";
-import * as http from "../utils/http";
+import {Locations} from "../../components/Locations/Locations.jsx";
+import {Map} from "../../components/Map/Map.jsx";
+import {TotalDistance} from "../../components/TotalDistance/TotalDistance.jsx";
+import {TotalTime} from "../../components/TotalTime/TotalTime.jsx";
+import {useUserLocation} from "../../hooks/useUserLocation.js";
+import {UserContext} from "../../context/UserContext.jsx";
+import * as http from "../../utils/http.js";
 
 const RoutePlanner = () => {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();

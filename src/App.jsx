@@ -4,11 +4,11 @@ import {createBrowserHistory} from "history";
 
 const history = createBrowserHistory();
 
-import Login from "./pages/Login";
-import RoutePlanner from "./pages/RoutePlanner";
-import RouteDetail from "./pages/RouteDetail.jsx";
+import Login from "./pages/Login/Login.jsx";
+import RoutePlanner from "./pages/RoutePlanner/RoutePlanner.jsx";
+import RouteDetail from "./pages/RouteDetail/RouteDetail.jsx";
 import UserProvider from "./context/UserContext";
-import {Layout} from "./components/Layout";
+import {Layout} from "./components/Layout/Layout.jsx";
 import {MsalProvider} from "@azure/msal-react";
 
 const App = ({msalInstance}) => {
