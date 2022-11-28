@@ -5,7 +5,7 @@ export function MsLogout({ onSuccessfulLogout }) {
   const { instance } = useMsal();
 
   function handleLogout() {
-    instance.logoutRedirect();
+    instance.logoutPopup();
     onSuccessfulLogout();
   }
 

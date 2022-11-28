@@ -1,0 +1,47 @@
+.locations {
+  &__add {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    margin-top: 15px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .location {
+    height: 40px;
+    background-color: #f4f4f4;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    margin-top: 10px;
+
+    &__label {
+      color: blue;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid blue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    &__input {
+      height: 24px;
+      line-height: 24px;
+      border: none;
+      background-color: #f4f4f4;
+      padding: 0 20px;
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.totalTime {
+  display: flex;
+  align-items: center;
+  color: #5b5b5b;
+
+  &__icon {
+    font-size: 24px;
+  }
+
+  &__value {
+    font-size: 18px;
+    margin-left: 20px;
+  }
+}

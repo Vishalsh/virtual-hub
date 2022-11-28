@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { LocationInput } from '../LocationInput/LocationInput';
+import styles from './Locations.module.scss';
 
 export function Locations({ userLocation, onSelectLocation, locationPoints }) {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);
@@ -12,27 +15,31 @@ export function Locations({ userLocation, onSelectLocation, locationPoints }) {
   }
 
   return (
-    <>
-      <article>
-        <span>Location A </span>
-        <input value={userLocation.name} readOnly />
+    <div className={styles.locations}>
+      <article className={styles.location}>
+        <span className={styles.location__label}>A</span>
+        <input value={userLocation.name} readOnly className={styles.location__input} />
       </article>
       {
         Array.from({ length: numberOfAddedLocations }, (v, i) => i).map((_, index) => (
-          <article key={locationSequence[index]}>
-            <span>
-              Location
+          <article key={locationSequence[index]} className={styles.location}>
+            <span className={styles.location__label}>
               {locationSequence[index]}
-              :
             </span>
-            <LocationInput onSelectLocation={onSelectLocation} location={locationPoints[index]} />
+            <LocationInput
+              onSelectLocation={onSelectLocation}
+              location={locationPoints[index]}
+              className={styles.location__input}
+            />
           </article>
         ))
       }
 
       {numberOfAddedLocations < 3 && (
-        <button type="button" onClick={addANewLocation}>Add a location +</button>
+        <button type="button" onClick={addANewLocation} className={styles.locations__add}>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
       )}
-    </>
+    </div>
   );
 }

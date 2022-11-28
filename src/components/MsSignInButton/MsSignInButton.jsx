@@ -23,7 +23,7 @@ export function MsSignInButton() {
   const { instance } = useMsal();
 
   function handleSignIn() {
-    instance.loginRedirect({
+    instance.loginPopup({
       scopes: ['user.read'],
     });
   }

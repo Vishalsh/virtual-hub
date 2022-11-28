@@ -29,15 +29,23 @@ export function Layout({ children }) {
 
   return (
     <>
-      <header>
-        {user.isLoggedIn
-          && (user.authProvider === AUTH_PROVIDER.google ? (
-            <GoogleLogout onSuccessfulLogout={clearUserDetails} />
-          ) : (
-            <MsLogout onSuccessfulLogout={clearUserDetails} />
-          ))}
+      <header className={styles.header}>
+        <h1 className={styles.header__title}>Virtual Hub</h1>
+        {user.isLoggedIn && (
+          user.authProvider === AUTH_PROVIDER.google
+            ? (
+              <div className={styles.logoutButton}>
+                <GoogleLogout onSuccessfulLogout={clearUserDetails} />
+              </div>
+            )
+            : (
+              <div className={styles.logoutButton}>
+                <MsLogout onSuccessfulLogout={clearUserDetails} />
+              </div>
+            )
+        )}
       </header>
-      <main className={styles.wrapper}>{children}</main>
+      <main className={styles.content}>{children}</main>
     </>
   );
 }

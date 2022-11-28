@@ -1,11 +1,14 @@
 import React, {
-  useState, useEffect, useContext, createRef,
+  createRef, useContext, useEffect, useState,
 } from 'react';
 import { RWebShare } from 'react-web-share';
 // import { MobileView } from 'react-device-detect';
 import addNotification from 'react-push-notification';
 import { Redirect } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsUpDown } from '@fortawesome/free-solid-svg-icons/faArrowsUpDown';
+import { faShareNodes } from '@fortawesome/free-solid-svg-icons/faShareNodes';
 import { Locations } from '../../components/Locations/Locations';
 import { Map } from '../../components/Map/Map';
 import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
@@ -13,6 +16,7 @@ import { TotalTime } from '../../components/TotalTime/TotalTime';
 import { useUserLocation } from '../../hooks/useUserLocation';
 import { UserContext } from '../../context/UserContext';
 import * as http from '../../utils/http';
+import styles from './RoutePlanner.module.scss';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
@@ -76,30 +80,46 @@ function RoutePlanner() {
   }
 
   return (
-    <>
-      <h2>
-        Hello
-        {user?.name}
-      </h2>
-      {userLocation?.lat && (
-        <>
+    <div className={styles.routePlanner}>
+      <div className={styles.routePlanner__locations}>
+        <h2 className={styles.routePlanner__user}>
+          Hello
+          {' '}
+          {user?.name}
+        </h2>
+        <div className={styles.routePlanner__points}>
           <Locations
             userLocation={userLocation}
             locationPoints={locationPoints}
             onSelectLocation={onSelectLocation}
           />
           {
-            locationPoints.length > 0 && <button type="button" onClick={reverseLocations}>Reverse</button>
+            locationPoints.length > 0 && (
+              <button type="button" onClick={reverseLocations} className={styles.routePlanner__reverse}>
+                <FontAwesomeIcon icon={faArrowsUpDown} />
+                <span>Reverse Route</span>
+              </button>
+            )
           }
-          {!!totalDistance && <TotalDistance distance={totalDistance} />}
-          {!!totalTime && <TotalTime time={totalTime} />}
+        </div>
+      </div>
+      {userLocation?.lat && (
+        <div className={styles.routePlanner__map}>
+          {(!!totalDistance || !!totalTime) && (
+            <div className={styles.stats}>
+              {!!totalDistance && <TotalDistance distance={totalDistance} />}
+              {!!totalTime && <TotalTime time={totalTime} />}
+            </div>
+          )}
           <Map
             userLocation={userLocation}
             locationPoints={locationPoints}
             afterDrawingRoute={showTotalDistanceAndTime}
           />
 
-          <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg" />
+          <div className={styles.routePlanner__uploadImage}>
+            <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg" />
+          </div>
           {locationPoints.length > 0 && (
             // <MobileView>
             //   <RWebShare
@@ -113,8 +133,8 @@ function RoutePlanner() {
             //     <button>Share 🔗</button>
             //   </RWebShare>
             // </MobileView>
-            <>
-              <button type="button" onClick={saveRoute}>Save 🔗</button>
+            <div className={styles.routePlanner__actions}>
+              <button type="button" onClick={saveRoute} className={styles.routePlanner__save}>Save</button>
               <RWebShare
                 data={{
                   text: 'Here is your shortest route',
@@ -122,13 +142,16 @@ function RoutePlanner() {
                   title: 'Shortest Route Finder',
                 }}
               >
-                <button type="button">Share 🔗</button>
+                <button type="button" className={styles.routePlanner__share}>
+                  <FontAwesomeIcon icon={faShareNodes} className={styles.routePlanner__shareIcon} />
+                  <span>Share</span>
+                </button>
               </RWebShare>
-            </>
+            </div>
           )}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

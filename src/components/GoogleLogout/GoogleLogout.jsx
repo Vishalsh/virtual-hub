@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { gapi } from 'gapi-script';
 import { useGoogleLogout } from 'react-google-login';
+import styles from './GoogleLogout.module.scss';
 
 export function GoogleLogout({ onSuccessfulLogout }) {
   const clientId = import.meta.env.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID;
@@ -22,5 +23,5 @@ export function GoogleLogout({ onSuccessfulLogout }) {
     onSuccessfulLogout();
   }
 
-  return <button type="button" onClick={logout}>Logout</button>;
+  return <button type="button" onClick={logout} className={styles.googleLogout}>Logout</button>;
 }

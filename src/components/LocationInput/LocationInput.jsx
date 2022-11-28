@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { usePlacesWidget } from 'react-google-autocomplete';
 
-export function LocationInput({ onSelectLocation, location }) {
+export function LocationInput({ onSelectLocation, location, className }) {
   function onPlaceSelect(place) {
     const {
       geometry,
@@ -31,5 +31,5 @@ export function LocationInput({ onSelectLocation, location }) {
     }
   }, [location]);
 
-  return <input ref={ref} />;
+  return <input ref={ref} className={className} />;
 }

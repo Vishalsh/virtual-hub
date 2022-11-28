@@ -4,8 +4,8 @@ import {
 } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '800px',
-  height: '500px',
+  width: '100%',
+  height: '100%',
 };
 
 export function Map({ userLocation, locationPoints, afterDrawingRoute }) {

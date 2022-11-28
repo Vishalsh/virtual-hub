@@ -1,0 +1,91 @@
+.routePlanner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__locations {
+    padding: 30px 50px;
+  }
+
+  &__points {
+    margin-top: 20px;
+    position: relative;
+  }
+
+  &__user {
+    font-size: 16px;
+    font-weight: normal;
+    color: #6b6b6b;
+  }
+
+  &__map {
+    flex: 1;
+    border-top: 1px solid #dbdbdb;
+    position: relative;
+    padding-top: 60px;
+  }
+
+  &__reverse {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #6b6b6b;
+
+    span {
+      margin-left: 4px;
+    }
+  }
+
+  .stats {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 8px 8px -10px black;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+  }
+
+  &__actions {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__save, &__share {
+    height: 40px;
+    background-color: blue;
+    color: #ffffff;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    border: none;
+    font-size: 16px;
+  }
+
+  &__share {
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  &__shareIcon {
+    font-size: 20px;
+  }
+
+  &__uploadImage {
+    display: flex;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+}
