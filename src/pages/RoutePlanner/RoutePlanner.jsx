@@ -19,6 +19,7 @@ import styles from './RoutePlanner.module.scss';
 import { ShareRoute } from '../../components/ShareRoute/ShareRoute';
 import { UploadImage } from '../../components/UploadImage/UploadImage';
 import { OptimalRouteContext } from '../../context/OptimalRoute';
+import { OptimalRoute } from '../../components/OptimalRoute/OptimalRoute';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
@@ -140,6 +141,14 @@ function RoutePlanner() {
                   )
                 }
               </div>
+              {
+                route
+                && (
+                <div className={styles.routePlanner__optimalRoute}>
+                  <OptimalRoute route={route} />
+                </div>
+                )
+              }
             </div>
           </div>
           <div className={styles.routePlanner__collapse}>

@@ -137,4 +137,13 @@
     width: 100%;
     margin: 15px 0;
   }
+
+  &__optimalRoute {
+    margin-top: 50px;
+    display: none;
+
+    @media only screen and (min-width: 768px) {
+      display: block;
+    }
+  }
 }
