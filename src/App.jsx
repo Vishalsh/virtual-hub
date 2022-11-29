@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import RoutePlanner from './pages/RoutePlanner/RoutePlanner';
 import RouteDetail from './pages/RouteDetail/RouteDetail';
 import UserProvider from './context/UserContext';
+import OptimalRouteProvider from './context/OptimalRoute';
 import { Layout } from './components/Layout/Layout';
 
 const history = createBrowserHistory();
@@ -27,9 +28,11 @@ function App({ msalInstance }) {
               <Route path="/route-planner/:routeId">
                 <RouteDetail />
               </Route>
-              <Route path="/route-planner">
-                <RoutePlanner />
-              </Route>
+              <OptimalRouteProvider>
+                <Route path="/route-planner">
+                  <RoutePlanner />
+                </Route>
+              </OptimalRouteProvider>
             </Switch>
           </Layout>
         </UserProvider>

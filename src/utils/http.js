@@ -1,17 +1,11 @@
-export async function post(url, data) {
+export async function post(url, data, options = {}) {
   const response = await fetch(url, {
     method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    body: data,
+    ...options,
   });
 
-  const jsonResponse = response.json();
-  if (jsonResponse.status > 400) {
-    throw jsonResponse.error;
-  }
-  return jsonResponse;
+  return response.json();
 }
 
 export async function get(url) {

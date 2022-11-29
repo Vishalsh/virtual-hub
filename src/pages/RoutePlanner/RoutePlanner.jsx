@@ -1,7 +1,6 @@
 import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
-// import { MobileView } from 'react-device-detect';
 import addNotification from 'react-push-notification';
 import { Redirect } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ import * as http from '../../utils/http';
 import styles from './RoutePlanner.module.scss';
 import { ShareRoute } from '../../components/ShareRoute/ShareRoute';
 import { UploadImage } from '../../components/UploadImage/UploadImage';
+import { OptimalRouteContext } from '../../context/OptimalRoute';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
@@ -26,6 +26,8 @@ function RoutePlanner() {
   const [totalTime, setTotalTime] = useState(0);
   const { user } = useContext(UserContext);
   const fileInput = useRef();
+  const { route, setRoute } = useContext(OptimalRouteContext);
+  const saveUrl = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/save/v1`;
 
   useEffect(() => {
     getUserLocation();
@@ -55,22 +57,25 @@ function RoutePlanner() {
 
   async function saveRoute() {
     try {
-      await http.post(
-        'https://e-commerce-microfrontends-apis.herokuapp.com/products',
-        {
-          userName: user.name,
-          image: fileInput.current.files[0],
-          route: {
-            origin: userLocation,
-            destination: locationPoints[locationPoints.length - 1],
-            wayPoints: locationPoints.slice(0, locationPoints.length - 1),
-          },
-        },
+      const formData = new FormData();
+      formData.append('file', fileInput.current.files[0]);
+      formData.append('userName', JSON.stringify(user.name));
+      formData.append('optimalJourney', JSON.stringify({
+        origin: route.origin,
+        destination: route.destination,
+        wayPoints: route.wayPoints,
+      }));
+      const response = await http.post(
+        saveUrl,
+        formData,
       );
+      if (response.status > 400) {
+        throw response.error;
+      }
       setRouteSaved(true);
       pushNotification();
     } catch (error) {
-      alert('Something went erong while saving the route');
+      alert('Something went erong while saving the route. Please try again later');
     }
   }
 
@@ -89,6 +94,7 @@ function RoutePlanner() {
     setLocationPoints([]);
     setTotalTime(0);
     setTotalDistance(0);
+    setRoute(null);
   }
 
   return (

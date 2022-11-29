@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 import * as http from '../../utils/http';
+import { OptimalRouteContext } from '../../context/OptimalRoute';
 
 export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
   const [directions, setDirections] = useState(null);
   const [directionsResultLoaded, setDirectionsResultLoaded] = useState(false);
-  const [route, setRoute] = useState(null);
+  const { route, setRoute } = useContext(OptimalRouteContext);
   const url = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/optimal-path`;
 
   async function fetchOptimalRoute() {
     try {
-      const optimalRoute = await http.post(url, {
+      const optimalRoute = await http.post(url, JSON.stringify({
         origin,
         wayPoints,
-      });
+      }), { headers: { 'Content-Type': 'application/json' } });
       setRoute(optimalRoute);
       setDirectionsResultLoaded(false);
     } catch (e) {
