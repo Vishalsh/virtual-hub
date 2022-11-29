@@ -11,32 +11,6 @@ import * as http from '../../utils/http';
 
 import styles from '../RoutePlanner/RoutePlanner.module.scss';
 
-const DUMMY_DATA = {
-  id: '71e4ee43-054e-4863-9265-daea29fb0fb0',
-  userName: 'Prashant Tomer',
-  routeImageUrl: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-  journey: {
-    origin: { lat: 28.5076444, lng: 77.0522823, name: 'Somewhere in NCR' },
-    wayPoints: [
-      {
-        lat: 28.632047,
-        lng: 77.1389094,
-        name: 'Naraina, New Delhi, Delhi, India',
-      },
-      {
-        lat: 28.5503314,
-        lng: 77.2501893,
-        name: 'Nehru Place, New Delhi, Delhi, India',
-      },
-    ],
-    destination: {
-      lat: 28.4594965,
-      lng: 77.0266383,
-      name: 'Gurugram, Haryana, India',
-    },
-  },
-};
-
 function RouteDetail() {
   const [route, setRoute] = useState(null);
   const [totalDistance, setTotalDistance] = useState(0);
