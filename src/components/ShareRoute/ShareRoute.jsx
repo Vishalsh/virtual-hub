@@ -34,7 +34,7 @@ export function ShareRoute({ routeSavedId, route, onPlanNewRoute }) {
         <RWebShare
           data={{
             text: shareMessageText,
-            url: `${window.location.host}/route-planner/${routeSavedId}`,
+            url: `${window.location.origin}/route-planner/${routeSavedId}`,
             title: 'Shortest Route Finder',
           }}
         >
