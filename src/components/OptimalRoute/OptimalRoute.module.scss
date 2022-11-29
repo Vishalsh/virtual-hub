@@ -4,19 +4,45 @@
   flex-direction: column;
   align-items: center;
 
+  &__heading {
+    font-weight: normal;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+  }
+
   &__name {
-    background-color: #5050e5;
-    color: #fff;
     border-radius: 4px;
     padding: 10px 20px;
     line-height: 24px;
-    min-height: 70px;
     width: 100%;
+    color: #6b6b6b;
+    border: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
   }
 
   &__arrowDown {
     display: inline-block;
     margin: 10px 0;
     font-size: 18px;
+  }
+
+  &__label {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ea4435;
+    border-radius: 50%;
+    font-size: 14px;
+    border: 1px solid #c51000;
+  }
+
+  &__text {
+    flex: 1;
+    margin-left: 20px;
   }
 }

@@ -3,28 +3,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
 import styles from './OptimalRoute.module.scss';
 
+const WAYPOINTS_LABELS = ['A', 'B', 'C', 'D'];
+
 export function OptimalRoute({ route }) {
+  const optimalRoute = [route.origin, ...route.wayPoints, route.destination];
   return (
     <div className={styles.optimalRoute}>
-      <div className={styles.optimalRoute__name}>{route.origin.name}</div>
-      <span className={styles.optimalRoute__arrowDown}>
-        <FontAwesomeIcon icon={faArrowDown} />
-      </span>
+      <h2 className={styles.optimalRoute__heading}>Optimal Route</h2>
       {
-        route.wayPoints.map((wayPoint) => (
+        optimalRoute.map((wayPoint, index) => (
           <>
             <div className={styles.optimalRoute__name}>
-              {wayPoint.name}
+              <span className={styles.optimalRoute__label}>{WAYPOINTS_LABELS[index]}</span>
+              <span className={styles.optimalRoute__text}>{wayPoint.name}</span>
             </div>
-            <span className={styles.optimalRoute__arrowDown}>
-              <FontAwesomeIcon icon={faArrowDown} />
-            </span>
+            {
+              index < optimalRoute.length - 1 && (
+              <span className={styles.optimalRoute__arrowDown}>
+                <FontAwesomeIcon icon={faArrowDown} />
+              </span>
+              )
+            }
           </>
         ))
       }
-      <div className={styles.optimalRoute__name}>
-        {route.destination.name}
-      </div>
     </div>
   );
 }

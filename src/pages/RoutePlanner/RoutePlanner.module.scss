@@ -20,19 +20,23 @@
   }
 
   &__locationsWrapper {
-    padding: 30px 40px;
+    padding: 30px 40px 10px 40px;
   }
 
   &__show {
-    max-height: 500px;
-    transition: max-height 0.5s;
-    overflow: hidden;
+    @media only screen and (max-width: 767px) {
+      max-height: 500px;
+      transition: max-height 0.5s;
+      overflow: hidden;
+    }
   }
 
   &__hide {
-    max-height: 0;
-    transition: max-height 0.5s;
-    overflow: hidden;
+    @media only screen and (max-width: 767px) {
+      max-height: 0;
+      transition: max-height 0.5s;
+      overflow: hidden;
+    }
   }
 
   &__points {
@@ -44,7 +48,6 @@
   &__user {
     font-size: 16px;
     font-weight: normal;
-    color: #6b6b6b;
   }
 
   &__map {
@@ -139,7 +142,7 @@
   }
 
   &__optimalRoute {
-    margin-top: 50px;
+    margin-top: 20px;
     display: none;
 
     @media only screen and (min-width: 768px) {
