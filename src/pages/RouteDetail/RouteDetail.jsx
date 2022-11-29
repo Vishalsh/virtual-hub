@@ -5,12 +5,13 @@ import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
 import { TotalTime } from '../../components/TotalTime/TotalTime';
 import * as http from '../../utils/http';
 
-import styles from './RouteDetail.module.scss';
+import styles from '../RoutePlanner/RoutePlanner.module.scss';
 
 const DUMMY_DATA = {
   id: '71e4ee43-054e-4863-9265-daea29fb0fb0',
   userName: 'Prashant Tomer',
-  routeImageUrl: 'https://difcvh.s3.ap-south-1.amazonaws.com/1669707866040_browerify.png',
+  routeImageUrl:
+    'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
   journey: {
     origin: { lat: 28.5076444, lng: 77.0522823, name: 'Somewhere in NCR' },
     wayPoints: [
@@ -38,7 +39,9 @@ function RouteDetail() {
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const { routeId } = useParams();
-  const routeDetailsUrl = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/fetch/${routeId}`;
+  const routeDetailsUrl = `${
+    import.meta.env.VIRTUAL_HUB_API_ENDPOINT
+  }/journey/fetch/${routeId}`;
 
   async function getRouteDetails() {
     try {
@@ -64,29 +67,35 @@ function RouteDetail() {
 
   return (
     route && (
-    <div className={styles.routeDetail}>
-      <div className={styles.user}>
-        <img
-          src={route.routeImageUrl}
-          alt="profile-pic"
-          style={{ maxWidth: '100%' }}
-          className={styles.user__image}
-        />
-        <div className={styles.user__name}>{route.userName}</div>
-      </div>
-      <div className={styles.routeDetail__map}>
-        <div className={styles.stats}>
-          {!!totalDistance && <TotalDistance distance={totalDistance} />}
-          {!!totalTime && <TotalTime time={totalTime} />}
+      <div className={styles.routePlanner}>
+        <div className={styles.routePlanner__locations}>
+          <h2 className={styles.routePlanner__user}>
+            Hello
+            {' '}
+            {route.userName}
+          </h2>
+          <img
+            src={route.routeImageUrl}
+            alt="routeImage"
+            className={styles.routePlanner__image}
+          />
         </div>
-        <Map
-          userLocation={route.journey.origin}
-          locationPoints={[...route.journey.wayPoints, route.journey.destination]}
-          afterDrawingRoute={showTotalDistanceAndTime}
-          showStaticRoute
-        />
+        <div className={styles.routePlanner__map}>
+          <div className={styles.stats}>
+            {!!totalDistance && <TotalDistance distance={totalDistance} />}
+            {!!totalTime && <TotalTime time={totalTime} />}
+          </div>
+          <Map
+            userLocation={route.journey.origin}
+            locationPoints={[
+              ...route.journey.wayPoints,
+              route.journey.destination,
+            ]}
+            afterDrawingRoute={showTotalDistanceAndTime}
+            showStaticRoute
+          />
+        </div>
       </div>
-    </div>
     )
   );
 }
