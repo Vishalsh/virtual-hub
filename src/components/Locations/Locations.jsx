@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faCar } from '@fortawesome/free-solid-svg-icons/faCar';
 import { LocationInput } from '../LocationInput/LocationInput';
 import styles from './Locations.module.scss';
 import { Loader } from '../Loader/Loader';
@@ -19,7 +20,9 @@ export function Locations({ userLocation, locationPoints, onSelectLocation }) {
     <div className={styles.locations}>
 
       <article className={styles.location}>
-        <span className={styles.location__label}>A</span>
+        <span className={styles.location__label}>
+          <FontAwesomeIcon icon={faCar} />
+        </span>
         <input value={userLocation.name || ''} readOnly className={styles.location__input} />
         {!userLocation?.name && <div><Loader /></div>}
       </article>
@@ -27,7 +30,7 @@ export function Locations({ userLocation, locationPoints, onSelectLocation }) {
         Array.from({ length: numberOfAddedLocations }, (v, i) => i).map((_, index) => (
           <article key={locationSequence[index]} className={styles.location}>
             <span className={styles.location__label}>
-              {locationSequence[index]}
+              <FontAwesomeIcon icon={faCar} />
             </span>
             <LocationInput
               index={index}
