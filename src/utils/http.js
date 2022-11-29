@@ -9,7 +9,12 @@ export async function post(url, data, options = {}) {
 }
 
 export async function get(url) {
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': true,
+    },
+  });
 
   return response.json();
 }

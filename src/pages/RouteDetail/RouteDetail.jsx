@@ -55,8 +55,7 @@ function RouteDetail() {
       }
       setRoute(response);
     } catch (error) {
-      setRoute(DUMMY_DATA);
-      // alert('Something went wrong whille fetching the route. Please try again after sometime');
+      alert('Something went wrong whille fetching the route. Please try again after sometime');
     }
   }
 
@@ -79,9 +78,9 @@ function RouteDetail() {
         <div className={`${styles.routePlanner__locations} ${showLocationPoints ? styles.routePlanner__show : styles.routePlanner__hide}`}>
           <div className={styles.routePlanner__locationsWrapper}>
             <h2 className={styles.routePlanner__user}>
-              Hello
-              {' '}
               {route.userName}
+              {' '}
+              Route
             </h2>
             <img
               src={route.routeImageUrl}
