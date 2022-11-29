@@ -5,12 +5,14 @@ import { RWebShare } from 'react-web-share';
 import { MobileView } from 'react-device-detect';
 import styles from './ShareRoute.module.scss';
 
-export function ShareRoute({ routeSavedId, route, onPlanNewRoute }) {
+export function ShareRoute({
+  userName, routeSavedId, route, uploadedImage, onPlanNewRoute,
+}) {
   function planNewRoute() {
     onPlanNewRoute();
   }
 
-  const shareMessageText = `Here is your shortest route starting from ${
+  const shareMessageText = `${userName} shortest route starting from ${
     route.origin.name
   } covering ${route.wayPoints.map(
     (wp) => wp.name,
@@ -19,7 +21,14 @@ export function ShareRoute({ routeSavedId, route, onPlanNewRoute }) {
   return (
     <div className={styles.shareRoute}>
       <div className={styles.shareRoute__wrapper}>
-        <p>Route has been saved successfully</p>
+        <div className={styles.shareRoute__details}>
+          <img
+            src={URL.createObjectURL(uploadedImage)}
+            className={styles.shareRoute__image}
+            alt="route"
+          />
+          <p>{`${userName}'s route has been saved successfully`}</p>
+        </div>
         <MobileView>
           <RWebShare
             data={{
@@ -37,7 +46,13 @@ export function ShareRoute({ routeSavedId, route, onPlanNewRoute }) {
             </button>
           </RWebShare>
         </MobileView>
-        <button type="button" onClick={planNewRoute} className={styles.shareRoute__link}>Plan a new Route</button>
+        <button
+          type="button"
+          onClick={planNewRoute}
+          className={styles.shareRoute__link}
+        >
+          Plan a new Route
+        </button>
       </div>
     </div>
   );

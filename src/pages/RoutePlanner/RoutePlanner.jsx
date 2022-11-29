@@ -112,86 +112,100 @@ function RoutePlanner() {
     setIsImageUploaded(isUploaded);
   }
 
-  return (
-    routeSaved
-      ? <ShareRoute route={route} routeSavedId={routeSavedId} onPlanNewRoute={planNewRoute} />
-      : (
-        <div className={styles.routePlanner}>
-          <div
-            className={`${styles.routePlanner__locations} ${showLocationPoints ? styles.routePlanner__show : styles.routePlanner__hide}`}
-          >
-            <div className={styles.routePlanner__locationsWrapper}>
-              <h2 className={styles.routePlanner__user}>
-                Hello
-                {' '}
-                {user?.name}
-              </h2>
-              <div className={styles.routePlanner__points}>
-                <Locations
-                  userLocation={userLocation}
-                  locationPoints={locationPoints}
-                  onSelectLocation={onSelectLocation}
-                />
-                {
-                  locationPoints.length > 0 && (
-                    <button type="button" onClick={reverseLocations} className={styles.routePlanner__reverse}>
-                      <FontAwesomeIcon icon={faArrowsUpDown} />
-                      <span>Reverse Route</span>
-                    </button>
-                  )
-                }
-              </div>
-              {
-                route
-                && (
-                <div className={styles.routePlanner__optimalRoute}>
-                  <OptimalRoute route={route} />
-                </div>
-                )
-              }
-            </div>
+  return routeSaved ? (
+    <ShareRoute
+      userName={user.name}
+      uploadedImage={fileInput.current.files[0]}
+      route={route}
+      routeSavedId={routeSavedId}
+      onPlanNewRoute={planNewRoute}
+    />
+  ) : (
+    <div className={styles.routePlanner}>
+      <div
+        className={`${styles.routePlanner__locations} ${
+          showLocationPoints
+            ? styles.routePlanner__show
+            : styles.routePlanner__hide
+        }`}
+      >
+        <div className={styles.routePlanner__locationsWrapper}>
+          <h2 className={styles.routePlanner__user}>
+            Hello
+            {' '}
+            {user?.name}
+          </h2>
+          <div className={styles.routePlanner__points}>
+            <Locations
+              userLocation={userLocation}
+              locationPoints={locationPoints}
+              onSelectLocation={onSelectLocation}
+            />
+            {locationPoints.length > 0 && (
+              <button
+                type="button"
+                onClick={reverseLocations}
+                className={styles.routePlanner__reverse}
+              >
+                <FontAwesomeIcon icon={faArrowsUpDown} />
+                <span>Reverse Route</span>
+              </button>
+            )}
           </div>
-          <div className={styles.routePlanner__collapse}>
-            <button
-              type="button"
-              onClick={toggleLocationPoints}
-              className={styles.routePlanner__collapseBtn}
-            >
-              {showLocationPoints
-                ? <FontAwesomeIcon icon={faAngleUp} />
-                : <FontAwesomeIcon icon={faAngleDown} />}
-            </button>
-          </div>
-          {userLocation?.lat && (
-            <div
-              className={`${styles.routePlanner__map} ${(!!totalDistance || !!totalTime) && styles.routePlanner__mapData}`}
-            >
-              {(!!totalDistance || !!totalTime) && (
-                <div className={styles.stats}>
-                  {!!totalDistance && <TotalDistance distance={totalDistance} />}
-                  {!!totalTime && <TotalTime time={totalTime} />}
-                </div>
-              )}
-              <Map
-                userLocation={userLocation}
-                locationPoints={locationPoints}
-                afterDrawingRoute={showTotalDistanceAndTime}
-              />
-              <div className={styles.routePlanner__actions}>
-                <UploadImage fileInputRef={fileInput} onUploadImage={changeIsImageUploaded} />
-                <button
-                  type="button"
-                  disabled={locationPoints.length === 0 || !isImageUploaded}
-                  onClick={saveRoute}
-                  className={styles.routePlanner__save}
-                >
-                  Save
-                </button>
-              </div>
+          {route && (
+            <div className={styles.routePlanner__optimalRoute}>
+              <OptimalRoute route={route} />
             </div>
           )}
         </div>
-      )
+      </div>
+      <div className={styles.routePlanner__collapse}>
+        <button
+          type="button"
+          onClick={toggleLocationPoints}
+          className={styles.routePlanner__collapseBtn}
+        >
+          {showLocationPoints ? (
+            <FontAwesomeIcon icon={faAngleUp} />
+          ) : (
+            <FontAwesomeIcon icon={faAngleDown} />
+          )}
+        </button>
+      </div>
+      {userLocation?.lat && (
+        <div
+          className={`${styles.routePlanner__map} ${
+            (!!totalDistance || !!totalTime) && styles.routePlanner__mapData
+          }`}
+        >
+          {(!!totalDistance || !!totalTime) && (
+            <div className={styles.stats}>
+              {!!totalDistance && <TotalDistance distance={totalDistance} />}
+              {!!totalTime && <TotalTime time={totalTime} />}
+            </div>
+          )}
+          <Map
+            userLocation={userLocation}
+            locationPoints={locationPoints}
+            afterDrawingRoute={showTotalDistanceAndTime}
+          />
+          <div className={styles.routePlanner__actions}>
+            <UploadImage
+              fileInputRef={fileInput}
+              onUploadImage={changeIsImageUploaded}
+            />
+            <button
+              type="button"
+              disabled={locationPoints.length === 0 || !isImageUploaded}
+              onClick={saveRoute}
+              className={styles.routePlanner__save}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
