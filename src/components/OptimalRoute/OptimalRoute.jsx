@@ -16,7 +16,7 @@ export function OptimalRoute({ route }) {
           optimalRoute.map((wayPoint, index) => (
             <>
               <span className={styles.optimalRoute__labelMobile}>{WAYPOINTS_LABELS[index]}</span>
-              <span className={styles.optimalRoute__textMobile}>{wayPoint.name}</span>
+              <span className={styles.optimalRoute__textMobile}>{`${wayPoint.name.split(',')[0]}, ${wayPoint.name.split(',')[1]}`}</span>
               {
                 index < optimalRoute.length - 1 && (
                   <span className={styles.optimalRoute__arrowRight}>

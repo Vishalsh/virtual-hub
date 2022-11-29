@@ -67,7 +67,6 @@ export function OptimalRouteDrawer({
             0,
           ),
           legs.reduce((totalTime, leg) => totalTime + leg.duration.value, 0),
-          wayPoints.length === 3,
         );
       } else {
         alert('Something went wrong while drawing the route');
