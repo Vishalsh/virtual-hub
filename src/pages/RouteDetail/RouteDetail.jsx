@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons/faAngleUp';
@@ -10,9 +10,12 @@ import { TotalTime } from '../../components/TotalTime/TotalTime';
 import * as http from '../../utils/http';
 
 import styles from '../RoutePlanner/RoutePlanner.module.scss';
+import { OptimalRoute } from '../../components/OptimalRoute/OptimalRoute';
+import { OptimalRouteContext } from '../../context/OptimalRoute';
 
 function RouteDetail() {
   const [route, setRoute] = useState(null);
+  const { route: optimalRoute } = useContext(OptimalRouteContext);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const [showLocationPoints, setShowLocationPoints] = useState(true);
@@ -24,7 +27,7 @@ function RouteDetail() {
   async function getRouteDetails() {
     try {
       const response = await http.get(routeDetailsUrl);
-      if (response > 400) {
+      if (response.status > 400) {
         throw response.error;
       }
       setRoute(response);
@@ -56,11 +59,21 @@ function RouteDetail() {
               {' '}
               Route
             </h2>
-            <img
-              src={route.routeImageUrl}
-              alt="routeImage"
-              className={styles.routePlanner__image}
-            />
+            <div className={styles.routePlanner__routeImage}>
+              <img
+                src={route.routeImageUrl}
+                alt="routeImage"
+                className={styles.routePlanner__image}
+              />
+            </div>
+            {
+              optimalRoute
+              && (
+                <div className={styles.routePlanner__optimalRoute}>
+                  <OptimalRoute route={optimalRoute} />
+                </div>
+              )
+             }
           </div>
         </div>
         <div className={styles.routePlanner__collapse}>
