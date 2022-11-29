@@ -1,5 +1,5 @@
 import React, {
-  createRef, useContext, useEffect, useState,
+  createRef, useContext, useEffect, useRef, useState,
 } from 'react';
 // import { MobileView } from 'react-device-detect';
 import addNotification from 'react-push-notification';
@@ -16,6 +16,7 @@ import { UserContext } from '../../context/UserContext';
 import * as http from '../../utils/http';
 import styles from './RoutePlanner.module.scss';
 import { ShareRoute } from '../../components/ShareRoute/ShareRoute';
+import { UploadImage } from '../../components/UploadImage/UploadImage';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
@@ -24,7 +25,7 @@ function RoutePlanner() {
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const { user } = useContext(UserContext);
-  const fileInput = createRef();
+  const fileInput = useRef();
 
   useEffect(() => {
     getUserLocation();
@@ -132,15 +133,12 @@ function RoutePlanner() {
                 locationPoints={locationPoints}
                 afterDrawingRoute={showTotalDistanceAndTime}
               />
-
-              <div className={styles.routePlanner__uploadImage}>
-                <input type="file" ref={fileInput} accept=".png, .jpg, .jpeg" />
-              </div>
-              {locationPoints.length > 0 && (
-                <div className={styles.routePlanner__actions}>
+              <div className={styles.routePlanner__actions}>
+                <UploadImage fileInputRef={fileInput} />
+                {locationPoints.length > 0 && (
                   <button type="button" onClick={saveRoute} className={styles.routePlanner__save}>Save</button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           )}
         </div>
