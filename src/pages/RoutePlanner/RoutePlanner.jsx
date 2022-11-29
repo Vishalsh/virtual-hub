@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsUpDown } from '@fortawesome/free-solid-svg-icons/faArrowsUpDown';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons/faAngleUp';
 import { Locations } from '../../components/Locations/Locations';
 import { Map } from '../../components/Map/Map';
 import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
@@ -17,6 +18,7 @@ import styles from './RoutePlanner.module.scss';
 import { ShareRoute } from '../../components/ShareRoute/ShareRoute';
 import { UploadImage } from '../../components/UploadImage/UploadImage';
 import { OptimalRouteContext } from '../../context/OptimalRoute';
+import { ShowLocationPointsContext } from '../../context/ShowLocationPointsContext';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
@@ -25,6 +27,7 @@ function RoutePlanner() {
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const { user } = useContext(UserContext);
+  const { showLocationPoints, setShowLocationPoints } = useContext(ShowLocationPointsContext);
   const fileInput = useRef();
   const { route, setRoute } = useContext(OptimalRouteContext);
   const saveUrl = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/save/v1`;
@@ -97,33 +100,45 @@ function RoutePlanner() {
     setRoute(null);
   }
 
+  function collapseLocationPoints() {
+    setShowLocationPoints(false);
+  }
+
   return (
     routeSaved
       ? <ShareRoute onPlanNewRoute={planNewRoute} />
       : (
         <div className={styles.routePlanner}>
-          <div className={styles.routePlanner__locations}>
-            <h2 className={styles.routePlanner__user}>
-              Hello
-              {' '}
-              {user?.name}
-            </h2>
-            <div className={styles.routePlanner__points}>
-              <Locations
-                userLocation={userLocation}
-                locationPoints={locationPoints}
-                onSelectLocation={onSelectLocation}
-              />
-              {
-                locationPoints.length > 0 && (
-                  <button type="button" onClick={reverseLocations} className={styles.routePlanner__reverse}>
-                    <FontAwesomeIcon icon={faArrowsUpDown} />
-                    <span>Reverse Route</span>
-                  </button>
-                )
-              }
+          {
+            showLocationPoints
+            && (
+            <div className={styles.routePlanner__locations}>
+              <h2 className={styles.routePlanner__user}>
+                Hello
+                {' '}
+                {user?.name}
+              </h2>
+              <div className={styles.routePlanner__points}>
+                <Locations
+                  userLocation={userLocation}
+                  locationPoints={locationPoints}
+                  onSelectLocation={onSelectLocation}
+                />
+                {
+                  locationPoints.length > 0 && (
+                    <button type="button" onClick={reverseLocations} className={styles.routePlanner__reverse}>
+                      <FontAwesomeIcon icon={faArrowsUpDown} />
+                      <span>Reverse Route</span>
+                    </button>
+                  )
+                }
+              </div>
+              <button type="button" onClick={collapseLocationPoints} className={styles.routePlanner__collapse}>
+                <FontAwesomeIcon icon={faAngleUp} />
+              </button>
             </div>
-          </div>
+            )
+          }
           {userLocation?.lat && (
             <div
               className={`${styles.routePlanner__map} ${(!!totalDistance || !!totalTime) && styles.routePlanner__mapData}`}
