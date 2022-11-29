@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
 import * as http from '../../utils/http';
