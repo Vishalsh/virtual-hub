@@ -18,7 +18,6 @@ export function Locations({ userLocation, locationPoints, onSelectLocation }) {
 
   return (
     <div className={styles.locations}>
-
       <article className={styles.location}>
         <span className={styles.location__label}>
           <FontAwesomeIcon icon={faCar} />
@@ -43,7 +42,12 @@ export function Locations({ userLocation, locationPoints, onSelectLocation }) {
       }
 
       {numberOfAddedLocations < 3 && (
-        <button type="button" onClick={addANewLocation} className={styles.locations__add}>
+        <button
+          type="button"
+          onClick={addANewLocation}
+          className={styles.locations__add}
+          disabled={numberOfAddedLocations !== locationPoints.length}
+        >
           <FontAwesomeIcon icon={faPlus} />
         </button>
       )}

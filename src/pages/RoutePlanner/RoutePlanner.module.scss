@@ -8,7 +8,6 @@
   }
 
   &__locations {
-    padding: 30px 40px;
     position: relative;
 
     @media only screen and (min-width: 768px) {
@@ -18,6 +17,22 @@
     @media only screen and (min-width: 1200px) {
       width: 400px;
     }
+  }
+
+  &__locationsWrapper {
+    padding: 30px 40px;
+  }
+
+  &__show {
+    max-height: 500px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+  }
+
+  &__hide {
+    max-height: 0;
+    transition: max-height 0.5s;
+    overflow: hidden;
   }
 
   &__points {
@@ -98,21 +113,23 @@
   }
 
   &__collapse {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 0 0;
+  }
+
+  &__collapseBtn {
     display: none;
     background-color: transparent;
     border: none;
     font-size: 18px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
     width: 24px;
     height: 24px;
-    align-items: center;
-    justify-content: center;
 
     @media only screen and (max-width: 767px) {
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

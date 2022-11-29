@@ -9,7 +9,6 @@ import RouteDetail from './pages/RouteDetail/RouteDetail';
 import UserProvider from './context/UserContext';
 import OptimalRouteProvider from './context/OptimalRoute';
 import { Layout } from './components/Layout/Layout';
-import ShowLocationPointsProvider from './context/ShowLocationPointsContext';
 
 const history = createBrowserHistory();
 
@@ -19,24 +18,22 @@ function App({ msalInstance }) {
       <BrowserRouter history={history}>
         <UserProvider>
           <OptimalRouteProvider>
-            <ShowLocationPointsProvider>
-              <Layout>
-                <Switch>
-                  <Route exact path="/">
-                    <Login />
-                  </Route>
-                  <Route exact path="/login">
-                    <Login />
-                  </Route>
-                  <Route path="/route-planner/:routeId">
-                    <RouteDetail />
-                  </Route>
-                  <Route path="/route-planner">
-                    <RoutePlanner />
-                  </Route>
-                </Switch>
-              </Layout>
-            </ShowLocationPointsProvider>
+            <Layout>
+              <Switch>
+                <Route exact path="/">
+                  <Login />
+                </Route>
+                <Route exact path="/login">
+                  <Login />
+                </Route>
+                <Route path="/route-planner/:routeId">
+                  <RouteDetail />
+                </Route>
+                <Route path="/route-planner">
+                  <RoutePlanner />
+                </Route>
+              </Switch>
+            </Layout>
           </OptimalRouteProvider>
         </UserProvider>
       </BrowserRouter>

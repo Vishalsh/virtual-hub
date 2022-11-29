@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsUpDown } from '@fortawesome/free-solid-svg-icons/faArrowsUpDown';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons/faAngleUp';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons/faAngleDown';
 import { Locations } from '../../components/Locations/Locations';
 import { Map } from '../../components/Map/Map';
 import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
@@ -18,18 +19,17 @@ import styles from './RoutePlanner.module.scss';
 import { ShareRoute } from '../../components/ShareRoute/ShareRoute';
 import { UploadImage } from '../../components/UploadImage/UploadImage';
 import { OptimalRouteContext } from '../../context/OptimalRoute';
-import { ShowLocationPointsContext } from '../../context/ShowLocationPointsContext';
 
 function RoutePlanner() {
   const [userLocation, getUserLocation, setUserLocation] = useUserLocation();
   const [routeSaved, setRouteSaved] = useState(false);
   const [locationPoints, setLocationPoints] = useState([]);
   const [totalDistance, setTotalDistance] = useState(0);
+  const [showLocationPoints, setShowLocationPoints] = useState(true);
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
   const [routeSavedId, setRouteSavedId] = useState('');
   const { user } = useContext(UserContext);
-  const { showLocationPoints, setShowLocationPoints } = useContext(ShowLocationPointsContext);
   const fileInput = useRef();
   const { route, setRoute } = useContext(OptimalRouteContext);
   const saveUrl = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/save/v1`;
@@ -103,8 +103,8 @@ function RoutePlanner() {
     setRoute(null);
   }
 
-  function collapseLocationPoints() {
-    setShowLocationPoints(false);
+  function toggleLocationPoints() {
+    setShowLocationPoints(!showLocationPoints);
   }
 
   function changeIsImageUploaded(isUploaded) {
@@ -116,10 +116,10 @@ function RoutePlanner() {
       ? <ShareRoute route={route} routeSavedId={routeSavedId} onPlanNewRoute={planNewRoute} />
       : (
         <div className={styles.routePlanner}>
-          {
-            showLocationPoints
-            && (
-            <div className={styles.routePlanner__locations}>
+          <div
+            className={`${styles.routePlanner__locations} ${showLocationPoints ? styles.routePlanner__show : styles.routePlanner__hide}`}
+          >
+            <div className={styles.routePlanner__locationsWrapper}>
               <h2 className={styles.routePlanner__user}>
                 Hello
                 {' '}
@@ -140,12 +140,19 @@ function RoutePlanner() {
                   )
                 }
               </div>
-              <button type="button" onClick={collapseLocationPoints} className={styles.routePlanner__collapse}>
-                <FontAwesomeIcon icon={faAngleUp} />
-              </button>
             </div>
-            )
-          }
+          </div>
+          <div className={styles.routePlanner__collapse}>
+            <button
+              type="button"
+              onClick={toggleLocationPoints}
+              className={styles.routePlanner__collapseBtn}
+            >
+              {showLocationPoints
+                ? <FontAwesomeIcon icon={faAngleUp} />
+                : <FontAwesomeIcon icon={faAngleDown} />}
+            </button>
+          </div>
           {userLocation?.lat && (
             <div
               className={`${styles.routePlanner__map} ${(!!totalDistance || !!totalTime) && styles.routePlanner__mapData}`}
@@ -163,7 +170,14 @@ function RoutePlanner() {
               />
               <div className={styles.routePlanner__actions}>
                 <UploadImage fileInputRef={fileInput} onUploadImage={changeIsImageUploaded} />
-                <button type="button" disabled={locationPoints.length === 0 || !isImageUploaded} onClick={saveRoute} className={styles.routePlanner__save}>Save</button>
+                <button
+                  type="button"
+                  disabled={locationPoints.length === 0 || !isImageUploaded}
+                  onClick={saveRoute}
+                  className={styles.routePlanner__save}
+                >
+                  Save
+                </button>
               </div>
             </div>
           )}

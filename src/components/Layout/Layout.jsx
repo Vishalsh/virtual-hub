@@ -7,12 +7,10 @@ import * as storage from '../../utils/storage';
 import { MsLogout } from '../MsLogout/MsLogout';
 import { AUTH_PROVIDER } from '../../utils/constants';
 import styles from './Layout.module.scss';
-import { ShowLocationPointsContext } from '../../context/ShowLocationPointsContext';
 
 export function Layout({ children }) {
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
-  const { showLocationPoints, setShowLocationPoints } = useContext(ShowLocationPointsContext);
 
   useEffect(() => {
     const storedUser = storage.getItem('user');
@@ -29,22 +27,9 @@ export function Layout({ children }) {
     return null;
   }
 
-  function toggleLocationPoints() {
-    setShowLocationPoints(!showLocationPoints);
-  }
-
   return (
     <>
       <header className={styles.header}>
-        <button
-          type="button"
-          className={styles.hamburger}
-          onClick={toggleLocationPoints}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
         <h1
           className={user.isLoggedIn ? styles.header__title : styles.header__titleMobile}
         >
