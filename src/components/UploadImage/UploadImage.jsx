@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { faRemove } from '@fortawesome/free-solid-svg-icons/faRemove';
@@ -56,7 +56,7 @@ export const UploadImage = React.forwardRef(({ fileInputRef }) => {
         }
         <span className={styles.uploadImage__imageWrapper}>
           {imageUrls.length === 0 && <FontAwesomeIcon icon={faPlus} />}
-          {imageUrls.map((imageSrc) => <img key={imageSrc} src={imageSrc} className={styles.uploadImage__image} alt="image" />)}
+          {imageUrls.map((imageSrc) => <img key={imageSrc} src={imageSrc} className={styles.uploadImage__image} alt="route" />)}
         </span>
         {imageUrls.length > 0 ? 'Remove Image' : 'Upload Image'}
       </label>

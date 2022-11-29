@@ -1,5 +1,5 @@
 import React, {
-  createRef, useContext, useEffect, useRef, useState,
+  useContext, useEffect, useRef, useState,
 } from 'react';
 // import { MobileView } from 'react-device-detect';
 import addNotification from 'react-push-notification';
