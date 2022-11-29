@@ -3,11 +3,15 @@ import { useParams } from 'react-router-dom';
 import { Map } from '../../components/Map/Map';
 import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
 import { TotalTime } from '../../components/TotalTime/TotalTime';
+import * as http from '../../utils/http';
+
 import styles from './RouteDetail.module.scss';
 
 const DUMMY_DATA = {
-  UUID: 'some-uuid-string',
-  route: {
+  id: '71e4ee43-054e-4863-9265-daea29fb0fb0',
+  userName: 'Prashant Tomer',
+  routeImageUrl: 'https://difcvh.s3.ap-south-1.amazonaws.com/1669707866040_browerify.png',
+  journey: {
     origin: { lat: 28.5076444, lng: 77.0522823, name: 'Somewhere in NCR' },
     wayPoints: [
       {
@@ -26,28 +30,31 @@ const DUMMY_DATA = {
       lng: 77.0266383,
       name: 'Gurugram, Haryana, India',
     },
-    totalDistance: '200km',
   },
-  userName: 'Prashant Tomer',
-  image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
 };
 
 function RouteDetail() {
-  const [routeData, setRouteData] = useState(null);
+  const [route, setRoute] = useState(null);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
-
   const { routeId } = useParams();
+  const routeDetailsUrl = `${import.meta.env.VIRTUAL_HUB_API_ENDPOINT}/journey/fetch/${routeId}`;
+
+  async function getRouteDetails() {
+    try {
+      const response = await http.get(routeDetailsUrl);
+      if (response > 400) {
+        throw response.error;
+      }
+      setRoute(response);
+    } catch (error) {
+      setRoute(DUMMY_DATA);
+      // alert('Something went wrong whille fetching the route. Please try again after sometime');
+    }
+  }
 
   useEffect(() => {
-    fetch(`/route-planner/${routeId}`)
-      .then((results) => results.json())
-      .then(() => {
-        setRouteData(routeData);
-      })
-      .catch(() => {
-        setRouteData(DUMMY_DATA);
-      });
+    getRouteDetails();
   }, []);
 
   function showTotalDistanceAndTime(distance, time) {
@@ -56,16 +63,16 @@ function RouteDetail() {
   }
 
   return (
-    routeData && (
+    route && (
     <div className={styles.routeDetail}>
       <div className={styles.user}>
         <img
-          src={routeData.image}
+          src={route.routeImageUrl}
           alt="profile-pic"
           style={{ maxWidth: '100%' }}
           className={styles.user__image}
         />
-        <div className={styles.user__name}>{routeData.userName}</div>
+        <div className={styles.user__name}>{route.userName}</div>
       </div>
       <div className={styles.routeDetail__map}>
         <div className={styles.stats}>
@@ -73,9 +80,10 @@ function RouteDetail() {
           {!!totalTime && <TotalTime time={totalTime} />}
         </div>
         <Map
-          userLocation={routeData.route.origin}
-          locationPoints={[...routeData.route.wayPoints, routeData.route.destination]}
+          userLocation={route.journey.origin}
+          locationPoints={[...route.journey.wayPoints, route.journey.destination]}
           afterDrawingRoute={showTotalDistanceAndTime}
+          showStaticRoute
         />
       </div>
     </div>

@@ -7,7 +7,9 @@ const containerStyle = {
   height: '100%',
 };
 
-export function Map({ userLocation, locationPoints, afterDrawingRoute }) {
+export function Map({
+  userLocation, locationPoints, afterDrawingRoute, showStaticRoute = false,
+}) {
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -19,6 +21,7 @@ export function Map({ userLocation, locationPoints, afterDrawingRoute }) {
         origin={userLocation}
         wayPoints={locationPoints}
         afterDrawingRoute={afterDrawingRoute}
+        showStaticRoute={showStaticRoute}
       />
     </GoogleMap>
   );

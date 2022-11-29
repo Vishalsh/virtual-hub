@@ -9,9 +9,7 @@ export async function post(url, data, options = {}) {
 }
 
 export async function get(url) {
-  const response = await fetch(url, {
-    method: '',
-  });
+  const response = await fetch(url);
 
   return response.json();
 }

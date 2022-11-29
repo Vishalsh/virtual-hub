@@ -4,7 +4,9 @@ import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import * as http from '../../utils/http';
 import { OptimalRouteContext } from '../../context/OptimalRoute';
 
-export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
+export function OptimalRouteDrawer({
+  origin, wayPoints, afterDrawingRoute, showStaticRoute,
+}) {
   const [directions, setDirections] = useState(null);
   const [directionsResultLoaded, setDirectionsResultLoaded] = useState(false);
   const { route, setRoute } = useContext(OptimalRouteContext);
@@ -33,11 +35,23 @@ export function OptimalRouteDrawer({ origin, wayPoints, afterDrawingRoute }) {
   }
 
   useEffect(() => {
-    if (wayPoints.length === 1) {
-      drawPathLocally();
+    if (showStaticRoute) {
+      setRoute({
+        origin,
+        destination: wayPoints[wayPoints.length - 1],
+        wayPoints: wayPoints.slice(0, wayPoints.length - 1),
+      });
     }
-    if (wayPoints.length > 1) {
-      fetchOptimalRoute();
+  }, []);
+
+  useEffect(() => {
+    if (!showStaticRoute) {
+      if (wayPoints.length === 1) {
+        drawPathLocally();
+      }
+      if (wayPoints.length > 1) {
+        fetchOptimalRoute();
+      }
     }
   }, [wayPoints]);
 

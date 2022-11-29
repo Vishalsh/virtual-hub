@@ -18,26 +18,26 @@ function App({ msalInstance }) {
     <MsalProvider instance={msalInstance}>
       <BrowserRouter history={history}>
         <UserProvider>
-          <ShowLocationPointsProvider>
-            <Layout>
-              <Switch>
-                <Route exact path="/">
-                  <Login />
-                </Route>
-                <Route exact path="/login">
-                  <Login />
-                </Route>
-                <Route path="/route-planner/:routeId">
-                  <RouteDetail />
-                </Route>
-                <OptimalRouteProvider>
+          <OptimalRouteProvider>
+            <ShowLocationPointsProvider>
+              <Layout>
+                <Switch>
+                  <Route exact path="/">
+                    <Login />
+                  </Route>
+                  <Route exact path="/login">
+                    <Login />
+                  </Route>
+                  <Route path="/route-planner/:routeId">
+                    <RouteDetail />
+                  </Route>
                   <Route path="/route-planner">
                     <RoutePlanner />
                   </Route>
-                </OptimalRouteProvider>
-              </Switch>
-            </Layout>
-          </ShowLocationPointsProvider>
+                </Switch>
+              </Layout>
+            </ShowLocationPointsProvider>
+          </OptimalRouteProvider>
         </UserProvider>
       </BrowserRouter>
     </MsalProvider>
