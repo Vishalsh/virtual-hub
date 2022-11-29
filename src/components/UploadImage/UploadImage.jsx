@@ -4,7 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { faRemove } from '@fortawesome/free-solid-svg-icons/faRemove';
 import styles from './UploadImage.module.scss';
 
-export const UploadImage = React.forwardRef(({ fileInputRef }) => {
+export const UploadImage = React.forwardRef(({ fileInputRef, onUploadImage }) => {
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const inputRef = fileInputRef;
@@ -18,6 +18,7 @@ export const UploadImage = React.forwardRef(({ fileInputRef }) => {
 
   function onImageChange(e) {
     setImages([...e.target.files]);
+    onUploadImage(true);
   }
 
   function removeImage(e) {
@@ -25,6 +26,7 @@ export const UploadImage = React.forwardRef(({ fileInputRef }) => {
     setImages([]);
     inputRef.current.value = null;
     e.preventDefault();
+    onUploadImage(false);
   }
 
   return (

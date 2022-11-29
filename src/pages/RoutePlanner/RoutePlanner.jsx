@@ -25,6 +25,7 @@ function RoutePlanner() {
   const [routeSaved, setRouteSaved] = useState(false);
   const [locationPoints, setLocationPoints] = useState([]);
   const [totalDistance, setTotalDistance] = useState(0);
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
   const { user } = useContext(UserContext);
   const { showLocationPoints, setShowLocationPoints } = useContext(ShowLocationPointsContext);
@@ -104,6 +105,10 @@ function RoutePlanner() {
     setShowLocationPoints(false);
   }
 
+  function changeIsImageUploaded(isUploaded) {
+    setIsImageUploaded(isUploaded);
+  }
+
   return (
     routeSaved
       ? <ShareRoute onPlanNewRoute={planNewRoute} />
@@ -155,10 +160,8 @@ function RoutePlanner() {
                 afterDrawingRoute={showTotalDistanceAndTime}
               />
               <div className={styles.routePlanner__actions}>
-                <UploadImage fileInputRef={fileInput} />
-                {locationPoints.length > 0 && (
-                  <button type="button" onClick={saveRoute} className={styles.routePlanner__save}>Save</button>
-                )}
+                <UploadImage fileInputRef={fileInput} onUploadImage={changeIsImageUploaded} />
+                <button type="button" disabled={locationPoints.length === 0 || !isImageUploaded} onClick={saveRoute} className={styles.routePlanner__save}>Save</button>
               </div>
             </div>
           )}
