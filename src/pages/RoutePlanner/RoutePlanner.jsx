@@ -46,9 +46,12 @@ function RoutePlanner() {
     setLocationPoints(updatedLocations);
   }
 
-  function showTotalDistanceAndTime(distance, time) {
+  function showTotalDistanceAndTime(distance, time, shouldHideLocationPointsOnMobile) {
     setTotalDistance(distance);
     setTotalTime(time);
+    if (shouldHideLocationPointsOnMobile) {
+      setShowLocationPoints(false);
+    }
   }
 
   function pushNotification() {
