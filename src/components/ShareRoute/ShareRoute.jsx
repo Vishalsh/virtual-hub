@@ -4,10 +4,16 @@ import { faShareNodes } from '@fortawesome/free-solid-svg-icons/faShareNodes';
 import { RWebShare } from 'react-web-share';
 import styles from './ShareRoute.module.scss';
 
-export function ShareRoute({ onPlanNewRoute }) {
+export function ShareRoute({ routeSavedId, route, onPlanNewRoute }) {
   function planNewRoute() {
     onPlanNewRoute();
   }
+
+  const shareMessageText = `Here is your shortest route starting from ${
+    route.origin.name
+  } covering ${route.wayPoints.map(
+    (wp) => wp.name,
+  ).join(',')} and ${route.destination.name}`;
 
   return (
     <div className={styles.shareRoute}>
@@ -27,8 +33,8 @@ export function ShareRoute({ onPlanNewRoute }) {
         {/* </MobileView> */}
         <RWebShare
           data={{
-            text: 'Here is your shortest route',
-            url: '/route-planner/some-route-id',
+            text: shareMessageText,
+            url: `${window.location.host}/route-planner/${routeSavedId}`,
             title: 'Shortest Route Finder',
           }}
         >

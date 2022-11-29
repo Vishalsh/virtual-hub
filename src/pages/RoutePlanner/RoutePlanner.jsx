@@ -27,6 +27,7 @@ function RoutePlanner() {
   const [totalDistance, setTotalDistance] = useState(0);
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
+  const [routeSavedId, setRouteSavedId] = useState('');
   const { user } = useContext(UserContext);
   const { showLocationPoints, setShowLocationPoints } = useContext(ShowLocationPointsContext);
   const fileInput = useRef();
@@ -77,9 +78,10 @@ function RoutePlanner() {
         throw response.error;
       }
       setRouteSaved(true);
+      setRouteSavedId(response);
       pushNotification();
     } catch (error) {
-      alert('Something went erong while saving the route. Please try again later');
+      alert('Something went wrong while saving the route. Please try again later');
     }
   }
 
@@ -111,7 +113,7 @@ function RoutePlanner() {
 
   return (
     routeSaved
-      ? <ShareRoute onPlanNewRoute={planNewRoute} />
+      ? <ShareRoute route={route} routeSavedId={routeSavedId} onPlanNewRoute={planNewRoute} />
       : (
         <div className={styles.routePlanner}>
           {
