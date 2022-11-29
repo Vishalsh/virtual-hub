@@ -27,6 +27,7 @@ export function LocationInput({
     onPlaceSelected: onPlaceSelect,
     options: {
       types: ['(regions)'],
+      componentRestrictions: { country: ['in', 'ae'] },
     },
   });
 
