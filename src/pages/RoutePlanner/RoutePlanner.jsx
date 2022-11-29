@@ -30,8 +30,11 @@ function RoutePlanner() {
     getUserLocation();
   }, []);
 
-  function onSelectLocation(location) {
-    setLocationPoints([...locationPoints, location]);
+  function onSelectLocation(locationIndex, location) {
+    const updatedLocations = [...locationPoints];
+    updatedLocations[locationIndex] = location;
+
+    setLocationPoints(updatedLocations);
   }
 
   function showTotalDistanceAndTime(distance, time) {

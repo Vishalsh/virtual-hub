@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { usePlacesWidget } from 'react-google-autocomplete';
 
-export function LocationInput({ onSelectLocation, location, className }) {
+export function LocationInput({
+  onSelectLocation,
+  location,
+  className,
+  index,
+}) {
   function onPlaceSelect(place) {
     const {
       geometry,
@@ -9,7 +14,7 @@ export function LocationInput({ onSelectLocation, location, className }) {
       formatted_address,
     } = place;
 
-    onSelectLocation({
+    onSelectLocation(index, {
       lat: geometry.location.lat(),
       lng: geometry.location.lng(),
       // eslint-disable-next-line camelcase

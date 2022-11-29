@@ -28,6 +28,7 @@ jobs:
           envkey_VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID: ${{ secrets.VIRTUAL_HUB_GOOGLE_AUTH_CLIENT_ID }}
           envkey_VIRTUAL_HUB_MS_AUTH_CLIENT_ID: ${{ secrets.VIRTUAL_HUB_MS_AUTH_CLIENT_ID }}
           envkey_VIRTUAL_HUB_MS_AUTH_AUTHORITY: ${{ secrets.VIRTUAL_HUB_MS_AUTH_AUTHORITY }}
+          envkey_VIRTUAL_HUB_API_ENDPOINT: ${{ secrets.VIRTUAL_HUB_API_ENDPOINT }}
 
       - name: Lint
         run: npm run lint

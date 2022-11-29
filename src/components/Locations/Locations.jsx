@@ -5,7 +5,7 @@ import { LocationInput } from '../LocationInput/LocationInput';
 import styles from './Locations.module.scss';
 import { Loader } from '../Loader/Loader';
 
-export function Locations({ userLocation, onSelectLocation, locationPoints }) {
+export function Locations({ userLocation, locationPoints, onSelectLocation }) {
   const [numberOfAddedLocations, setNumberOfAddedLocations] = useState(0);
   const locationSequence = ['B', 'C', 'D'];
 
@@ -17,9 +17,10 @@ export function Locations({ userLocation, onSelectLocation, locationPoints }) {
 
   return (
     <div className={styles.locations}>
+
       <article className={styles.location}>
         <span className={styles.location__label}>A</span>
-        <input value={userLocation.name} readOnly className={styles.location__input} />
+        <input value={userLocation.name || ''} readOnly className={styles.location__input} />
         {!userLocation?.name && <div><Loader /></div>}
       </article>
       {
@@ -29,6 +30,7 @@ export function Locations({ userLocation, onSelectLocation, locationPoints }) {
               {locationSequence[index]}
             </span>
             <LocationInput
+              index={index}
               onSelectLocation={onSelectLocation}
               location={locationPoints[index]}
               className={styles.location__input}
