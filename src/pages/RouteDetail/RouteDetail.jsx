@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Map } from '../../components/Map/Map';
 import { TotalDistance } from '../../components/TotalDistance/TotalDistance';
 import { TotalTime } from '../../components/TotalTime/TotalTime';
+import styles from './RouteDetail.module.scss';
 
 const DUMMY_DATA = {
   UUID: 'some-uuid-string',
@@ -27,7 +28,7 @@ const DUMMY_DATA = {
     },
     totalDistance: '200km',
   },
-  userName: 'Prashant',
+  userName: 'Prashant Tomer',
   image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
 };
 
@@ -56,16 +57,21 @@ function RouteDetail() {
 
   return (
     routeData && (
-    <div className="route-detail">
-      <div className="profile-info">
-        <div className="profile-image" style={{ width: '60px' }}>
-          <img src={routeData.image} alt="profile-pic" style={{ maxWidth: '100%' }} />
-        </div>
-        <div className="userName">{routeData.userName}</div>
+    <div className={styles.routeDetail}>
+      <div className={styles.user}>
+        <img
+          src={routeData.image}
+          alt="profile-pic"
+          style={{ maxWidth: '100%' }}
+          className={styles.user__image}
+        />
+        <div className={styles.user__name}>{routeData.userName}</div>
       </div>
-      <div className="route-map">
-        {!!totalDistance && <TotalDistance distance={totalDistance} />}
-        {!!totalTime && <TotalTime time={totalTime} />}
+      <div className={styles.routeDetail__map}>
+        <div className={styles.stats}>
+          {!!totalDistance && <TotalDistance distance={totalDistance} />}
+          {!!totalTime && <TotalTime time={totalTime} />}
+        </div>
         <Map
           userLocation={routeData.route.origin}
           locationPoints={[...routeData.route.wayPoints, routeData.route.destination]}

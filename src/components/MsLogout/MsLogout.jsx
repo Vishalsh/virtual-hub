@@ -1,5 +1,8 @@
 import React from 'react';
 import { useMsal } from '@azure/msal-react';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons/faSignOut';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './MsLogout.module.scss';
 
 export function MsLogout({ onSuccessfulLogout }) {
   const { instance } = useMsal();
@@ -9,5 +12,14 @@ export function MsLogout({ onSuccessfulLogout }) {
     onSuccessfulLogout();
   }
 
-  return <button type="button" onClick={handleLogout}>Sign out</button>;
+  return (
+    <button
+      type="button"
+      onClick={handleLogout}
+      className={styles.msLogout}
+    >
+      <FontAwesomeIcon icon={faSignOut} />
+      <span>Logout</span>
+    </button>
+  );
 }

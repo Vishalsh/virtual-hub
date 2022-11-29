@@ -1,0 +1,55 @@
+.routeDetail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+
+    @media only screen and (min-width: 768px) {
+      width: 320px;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      width: 400px;
+    }
+
+    &__image {
+      width: 100px;
+    }
+
+    &__name {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  }
+
+  .stats {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 8px 8px -10px black;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+  }
+
+  &__map {
+    flex: 1;
+    border-top: 1px solid #dbdbdb;
+    position: relative;
+    padding-top: 60px;
+  }
+}
