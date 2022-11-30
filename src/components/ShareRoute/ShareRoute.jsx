@@ -13,11 +13,7 @@ export function ShareRoute({
     onPlanNewRoute();
   }
 
-  const shareMessageText = `${userName} shortest route starting from ${
-    route.origin.name
-  } covering ${route.wayPoints.map(
-    (wp) => wp.name,
-  ).join(',')} and ${route.destination.name}`;
+  const shareMessageText = `${userName} has shared a route with you! Preview route ${route.origin.name.split(',')[0]}, ${route.origin.name.split(',')[1]} > ${route.wayPoints.map((wp) => `${wp.name.split(',')[0]}, ${wp.name.split(',')[1]}`).join('>')} > ${route.destination.name.split(',')[0]}, ${route.destination.name.split(',')[1]}`;
 
   return (
     <div className={styles.shareRoute}>
