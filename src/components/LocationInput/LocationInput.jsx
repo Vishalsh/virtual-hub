@@ -26,7 +26,7 @@ export function LocationInput({
     apiKey: import.meta.env.VIRTUAL_HUB_GOOGLE_MAP_API_KEY,
     onPlaceSelected: onPlaceSelect,
     options: {
-      types: ['(regions)'],
+      types: ['establishment'],
       componentRestrictions: { country: ['in', 'ae'] },
     },
   });

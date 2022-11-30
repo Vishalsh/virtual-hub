@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons/faShareNodes';
 import { RWebShare } from 'react-web-share';
@@ -27,7 +28,10 @@ export function ShareRoute({
             className={styles.shareRoute__image}
             alt="route"
           />
-          <p>{`${userName}'s route has been saved successfully`}</p>
+          <p>
+            <Link target="_blank" to={`/route-planner/${routeSavedId}`}>{`${userName}'s route`}</Link>
+            <span>has been saved successfully</span>
+          </p>
         </div>
         <MobileView>
           <RWebShare
