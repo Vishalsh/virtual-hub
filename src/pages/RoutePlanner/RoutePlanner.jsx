@@ -129,6 +129,17 @@ function RoutePlanner() {
             : styles.routePlanner__hide
         }`}
       >
+        <div className={styles.routePlanner__expand}>
+          <button
+            type="button"
+            onClick={toggleLocationPoints}
+            className={styles.routePlanner__collapseBtn}
+          >
+            {!showLocationPoints && (
+              <FontAwesomeIcon icon={faAngleDown} />
+            )}
+          </button>
+        </div>
         <div className={styles.routePlanner__locationsWrapper}>
           <h2 className={styles.routePlanner__user}>
             Hello
@@ -158,19 +169,17 @@ function RoutePlanner() {
             </div>
           )}
         </div>
-      </div>
-      <div className={styles.routePlanner__collapse}>
-        <button
-          type="button"
-          onClick={toggleLocationPoints}
-          className={styles.routePlanner__collapseBtn}
-        >
-          {showLocationPoints ? (
-            <FontAwesomeIcon icon={faAngleUp} />
-          ) : (
-            <FontAwesomeIcon icon={faAngleDown} />
-          )}
-        </button>
+        <div className={styles.routePlanner__collapse}>
+          <button
+            type="button"
+            onClick={toggleLocationPoints}
+            className={styles.routePlanner__collapseBtn}
+          >
+            {showLocationPoints && (
+              <FontAwesomeIcon icon={faAngleUp} />
+            )}
+          </button>
+        </div>
       </div>
       {userLocation?.lat && (
         <div

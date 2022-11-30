@@ -53,6 +53,17 @@ function RouteDetail() {
     route && (
       <div className={styles.routePlanner}>
         <div className={`${styles.routePlanner__locations} ${showLocationPoints ? styles.routePlanner__show : styles.routePlanner__hide}`}>
+          <div className={styles.routePlanner__expand}>
+            <button
+              type="button"
+              onClick={toggleLocationPoints}
+              className={styles.routePlanner__collapseBtn}
+            >
+              {!showLocationPoints && (
+                <FontAwesomeIcon icon={faAngleDown} />
+              )}
+            </button>
+          </div>
           <div className={styles.routePlanner__locationsWrapper}>
             <h2 className={styles.routePlanner__user}>
               {route.userName}
@@ -75,21 +86,21 @@ function RouteDetail() {
               )
              }
           </div>
+          <div className={styles.routePlanner__collapse}>
+            <button
+              type="button"
+              onClick={toggleLocationPoints}
+              className={styles.routePlanner__collapseBtn}
+            >
+              {showLocationPoints ? (
+                <FontAwesomeIcon icon={faAngleUp} />
+              ) : (
+                <FontAwesomeIcon icon={faAngleDown} />
+              )}
+            </button>
+          </div>
         </div>
-        <div className={styles.routePlanner__collapse}>
-          <button
-            type="button"
-            onClick={toggleLocationPoints}
-            className={styles.routePlanner__collapseBtn}
-          >
-            {showLocationPoints ? (
-              <FontAwesomeIcon icon={faAngleUp} />
-            ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
-            )}
-          </button>
-        </div>
-        <div className={styles.routePlanner__map}>
+        <div className={`${styles.routePlanner__map} ${styles.routePlanner__mapData}`}>
           <div className={styles.stats}>
             {!!totalDistance && <TotalDistance distance={totalDistance} />}
             {!!totalTime && <TotalTime time={totalTime} />}
