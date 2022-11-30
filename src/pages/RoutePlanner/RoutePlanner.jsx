@@ -65,8 +65,8 @@ function RoutePlanner() {
     try {
       const formData = new FormData();
       formData.append('file', fileInput.current.files[0]);
-      formData.append('userName', JSON.stringify(user.name));
       formData.append('optimalJourney', JSON.stringify({
+        userName: user.name,
         origin: route.origin,
         destination: route.destination,
         wayPoints: route.wayPoints,
