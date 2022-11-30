@@ -33,7 +33,7 @@ export function Layout({ children }) {
         <h1
           className={user.isLoggedIn ? styles.header__title : styles.header__titleMobile}
         >
-          Virtual Hub
+          Virtual Hub V2
         </h1>
         {user.isLoggedIn && (
           user.authProvider === AUTH_PROVIDER.google
