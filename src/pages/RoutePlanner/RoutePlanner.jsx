@@ -181,6 +181,11 @@ function RoutePlanner() {
           </button>
         </div>
       </div>
+      {!userLocation?.lat && (
+        <div className={styles.routePlanner__mapLoading}>
+          Initialising map. Please ensure location permission has been granted to the app.
+        </div>
+      )}
       {userLocation?.lat && (
         <div
           className={`${styles.routePlanner__map} ${
